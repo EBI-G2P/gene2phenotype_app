@@ -78,7 +78,7 @@
               <label>Comments:</label>
                 <div class="comment">
                   <div class="align_left"><p><%= $comment->{comment_text} %> (<%= $comment->{user} %> <%= $comment->{date} %>)</p></div>
-                  <% if ($logged_in && grep(/^$gfd->{panel}$/, @$panels)) { %>
+                  <% if ($logged_in) { %>
                     <div class="align_right">
                       %= form_for '/gene2phenotype/gfd/phenotype/delete_comment' => begin
                         %= hidden_field GFD_phenotype_comment_id => $comment->{GFD_phenotype_comment_id}
