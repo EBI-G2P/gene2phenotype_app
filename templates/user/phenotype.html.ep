@@ -24,8 +24,8 @@
       </div>
 
       <p>
-        <% my $link = "https://decipher.sanger.ac.uk/gene/" . $gene->{gene_symbol} . "#phenotypes"; %>
-        <%= link_to $link => (target => '_blank') => begin %>Look up phenotypes associated with <%= $gfd->{gene_symbol} %> in Decipher <% end %>
+        <% my $link = "https://www.deciphergenomics.org/gene/" . $gene->{gene_symbol} . "/phenotypes"; %>
+        <%= link_to $link => (target => '_blank') => begin %>Look up phenotypes associated with <%= $gfd->{gene_symbol} %> in DECIPHER <% end %>
       </p>
     
       <% if (scalar @{$gfd->{phenotypes}} > 0) { %>

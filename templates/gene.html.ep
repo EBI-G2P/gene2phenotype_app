@@ -30,13 +30,13 @@
       <dd>
         <% my $link = "https://www.ncbi.nlm.nih.gov/clinvar/?term=" . $gene->{gene_symbol} . "%5Bgene%5D"; %>
         <%= link_to $link => (target => '_blank') => begin %>ClinVar<% end %>
-        <% $link = "https://decipher.sanger.ac.uk/gene/" . $gene->{gene_symbol} . "#variants/" . $gene->{gene_symbol} . "/patient-overlap/snvs"; %>
-        <%= link_to $link => (target => '_blank') => begin %>Decipher<% end %>
+        <% $link = "https://www.deciphergenomics.org/gene/" . $gene->{gene_symbol} . "/patient-overlap"; %>
+        <%= link_to $link => (target => '_blank') => begin %>DECIPHER<% end %>
       </dd>
       <dt>Protein information</dt>
       <dd>
-        <% $link = "https://decipher.sanger.ac.uk/gene/" . $gene->{gene_symbol} . "#overview/protein-info"; %>
-        <%= link_to $link => (target => '_blank') => begin %>Decipher<% end %>
+        <% $link = "https://www.deciphergenomics.org/gene/" . $gene->{gene_symbol} . "/overview/protein-genomic-info"; %>
+        <%= link_to $link => (target => '_blank') => begin %>DECIPHER<% end %>
       </dd>
     </dl>
   </div>
