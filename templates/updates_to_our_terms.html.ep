@@ -243,7 +243,7 @@
     <tr>
       <td>activating</td>
       <td class="info">altered gene product structure</td>
-      <td>Code with flag <span class="label label-info">restricted mutation set</span></td>
+      <td>Code with flag <span class="label label-info">restricted repertoire of mutations</span></td>
     </tr>
     <tr>
       <td>all missense/in frame</td>
@@ -258,12 +258,12 @@
     <tr>
       <td>dominant negative</td>
       <td class="info">altered gene product structure</td>
-      <td>Code with flag <span class="label label-info">restricted mutation set</span></td>
+      <td>Code with flag <span class="label label-info">restricted repertoire of mutations</span></td>
     </tr>
     <tr>
       <td>gain of function</td>
       <td class="info">altered gene product structure</td>
-      <td>Code with flag <span class="label label-info">restricted mutation set</span></td>
+      <td>Code with flag <span class="label label-info">restricted repertoire of mutations</span></td>
     </tr>
     <tr>
       <td>increased gene dosage</td>

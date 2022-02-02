@@ -21,10 +21,10 @@ consequence. The header fields are:
   - prev symbols:                 Symbols previously approved by the HGNC for this gene
   - hgnc id:                      HGNC identifier
   - gene disease pair entry date: Entry date for the gene disease pair into the database
-  - cross cutting modifier        comma seperated list of possible cross cutting modifier attributes. : 
+  - cross cutting modifier        semi-colon separated list of possible cross cutting modifier attributes : 
                                   requires heterozygosity, typically de novo, typically mosaic, imprinted, typified by age related penetrance, typified by reduced penetrance.
   - mutation consequences flag    One value from the list of possible flags : 
                                   likely to escape nonsense mediated decay, part of contiguous gene duplication, part of contiguous genomic interval deletion, restricted repertoire of mutations.  
 
-These release files are generated on the fly to include the latest data. Previous data freezes, including a set from 1/12/2021 using the original terms for confidence, allelic requirement etc, are available on the G2P FT site: ttp://ftp.ebi.ac.uk/pub/databases/gene2phenotype/’
+These release files are generated on the fly to include the latest data. Previous data freezes, including a set from 1/12/2021 using the original terms for confidence, allelic requirement etc, are available on the G2P FTP site: http://ftp.ebi.ac.uk/pub/databases/gene2phenotype/’
 The _md5.txt file has the checksum value that is used to check the integrity of the file downloaded. 
