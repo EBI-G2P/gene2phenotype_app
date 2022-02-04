@@ -27,4 +27,17 @@
     <li><a href="https://www.ncl.ac.uk/medicalsciences/research/groups/profile/neilrajan.html#background">Neil Rajan</a></li>
   </ul>
 </div>
+<div class="container">
+  <h3>Publications</h3>
+    <ul class="list-unstyled">
+      <li>
+        <p class="h4"><a href="https://doi.org/10.1038/s41467-019-10016-3" target="_blank">Flexible and scalable diagnostic filtering of genomic variants using G2P with Ensembl VEP.</a></p>
+        <p class="h5">Thormann A, Halachev M, McLaren W, Moore DJ, Svinti V, Campbell A, Kerr SM, Tischkowitz M, Hunt SE, Dunlop MG, Hurles ME, Wright CF, Firth HV, Cunningham F, FitzPatrick DR (2019).</p>
+      </li>
+      <li>
+        <p class="h4"><a href="https://doi.org/10.1101/2021.07.23.21261017" target="_blank">EyeG2P: an automated variant filtering approach improves efficiency of diagnostic genomic testing for inherited ophthalmic disorders.</a></p>
+        <p class="h5">Eva Lenassi, Ana Carvalho, Anja Thormann, Tracy Fletcher, Claire Hardcastle, Sarah E Hunt, Panagiotis I Sergouniotis, Michel Michaelides, Andrew R Webster, F Cunningham, Simon Ramsden, David R FitzPatrick, Graeme CM Black, Jamie M Ellingford (2021).</p>
+      </li
+    </ul>
+</div>
 %= include 'footer'
