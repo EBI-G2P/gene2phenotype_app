@@ -1,0 +1,11 @@
+<div>
+  <h3>Comments</h3>
+  <% foreach my $comment (@{$gfd->{comments}}) { %>
+    <div class="comments">
+      % if ($comment->{is_public} == 1){
+        <p> <%= $comment->{comment_text} %> </p>
+      %}
+    </div>
+  <% } %>
+</div>
+  

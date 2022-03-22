@@ -27,6 +27,7 @@
   %= include 'gene'
   %= include 'statistics'
   %= include 'disease'
+  %= include 'public_comments'
   %= include 'publication'
   %= include 'phenotype'
   %= include 'organ'

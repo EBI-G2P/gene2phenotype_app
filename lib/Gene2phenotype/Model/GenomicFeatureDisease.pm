@@ -600,6 +600,7 @@ sub get_comments {
       user => $comment->get_User()->username,
       date => $comment->created,
       comment_text => $comment->comment_text,
+      is_public => $comment->is_public, 
       GFD_comment_id => $comment->dbID,
       GFD_id => $GFD->dbID,
     };
