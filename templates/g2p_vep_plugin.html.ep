@@ -56,12 +56,12 @@
       </tr>
       <tr>
         <th scope="row">confidence_levels</th>
-        <td>Confidence levels to include: confirmed, probable, possible, both RD and IF. Separate multiple values with '&'.<br> https://www.ebi.ac.uk/gene2phenotype/terminology</td>
-        <td>confirmed, probable</td>
+        <td>We still support confidence levels of our old terminology. Confidence levels to include: definitive, strong, limited, moderate, confirmed, probable, possible, both RD and IF. Separate multiple values with '&'.<br> https://www.ebi.ac.uk/gene2phenotype/terminology</td>
+        <td>definitive, strong, moderate, confirmed, probable</td>
       </tr>
       <tr>
         <th scope="row">all_confidence_levels</th>
-        <td>Set value to 1 to include all confidence levels: confirmed, probable and possible</td>
+        <td>Set value to 1 to include all confidence levels: definitive, strong, limited, moderate, confirmed, probable and possible</td>
         <td>0</td>
       </tr>
       <tr>
@@ -90,7 +90,7 @@
       </tr>
       <tr>
         <th scope="row">log_dir</td>
-        <td>The log_dir is required to store log_files which are used for writting intermediate results. The log_files can be consulted for any frequency filtering decisions.</td>
+        <td>The log_dir is required to store log_files which are used for writting intermediate results. The log_dir should be empty. The log_files can be consulted for any frequency filtering decisions.</td>
         <td>current_working_dir/g2p_log_dir_[year]_[mon]_[mday]_[hour]_[min]_[sec]</td>
       </tr>
       <tr>
@@ -205,8 +205,20 @@
       <th>Gene Ratings</th>
     </tr>
     <tr>
-      <td>Confirmed</td>
+      <td>Definitive</td>
       <td rowspan="3">Green</td>
+    </tr>
+    <tr>
+      <td>Strong</td>
+    </tr>
+    <tr>
+      <td>Moderate</td>
+    </tr>
+    <tr>
+      <td>Limited</td>
+    </tr>
+    <tr>
+      <td>Confirmed</td>
     </tr>
     <tr>
       <td>Probable</td>
@@ -219,7 +231,7 @@
       <th>Model of inheritance</th>
     </tr>
     <tr>
-      <td rowspan="6">monoallelic</td>
+      <td rowspan="6">monoallelic_autosomal or monoallelic</td>
       <td>MONOALLELIC, autosomal or pseudoautosomal, not imprinted</td>
     </tr>
     <tr>
@@ -238,7 +250,7 @@
       <td>BOTH monoallelic and biallelic (but BIALLELIC mutations cause a more SEVERE disease form), autosomal or pseudoautosomal</td>
     </tr>
     <tr>
-      <td rowspan="3">biallelic</td>
+      <td rowspan="3">biallelic_autosomal or biallelic</td>
       <td>BIALLELIC, autosomal or pseudoautosomal</td>
     </tr>
     <tr>
@@ -248,11 +260,11 @@
       <td>BOTH monoallelic and biallelic (but BIALLELIC mutations cause a more SEVERE disease form), autosomal or pseudoautosomal</td>
     </tr>
     <tr>
-      <td>hemizygous</td>
+      <td>monoallelic_X_hem or hemizygous</td>
       <td>X-LINKED: hemizygous mutation in males, biallelic mutations in females</td>
     </tr>
     <tr>
-      <td>X-linked dominant</td>
+      <td>monoallelic_X_het or X-linked dominant</td>
       <td>X-LINKED: hemizygous mutation in males, monoallelic mutations in females may cause disease (may be less severe, later onset than males)</td>
     </tr>
   </table>
