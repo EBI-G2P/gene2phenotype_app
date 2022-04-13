@@ -32,6 +32,15 @@
       % }
     </dl>
     
+    <dl>
+      <br>
+        % if ( $gfd->{variant_consequence} ) {
+          <dt>Variant consequence</dt>
+          % for (split /,/, $gfd->{variant_consequence} ) {
+            <dd><p><span class= "label label-warning"><%= $_ %></span></p></dd>
+          % }
+        % }
+    </dl>
   </div>
 
   <% if (@{$gfd->{logs}}) { %>

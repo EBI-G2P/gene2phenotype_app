@@ -69,6 +69,8 @@ sub fetch_by_dbID {
   my $mutation_consequence_flag_list = $self->get_mutation_consequence_flag_list($gfd, $logged_in);
   my $cross_cutting_modifier = $gfd->cross_cutting_modifier;
   my $cross_cutting_modifier_list = $self->get_cross_cutting_modifier_list($gfd, $logged_in);
+  my $variant_consequence = $gfd->variant_consequence;
+  my $variant_consequence_list = $self->get_variant_consequence_list($gfd, $logged_in);
   my $comments = $self->get_comments($gfd);
   my $publications = $self->get_publications($gfd);
   my $phenotypes = $self->get_phenotypes($gfd);
@@ -94,6 +96,8 @@ sub fetch_by_dbID {
     mutation_consequence_flag_list => $mutation_consequence_flag_list,
     cross_cutting_modifier => $cross_cutting_modifier, 
     cross_cutting_modifier_list => $cross_cutting_modifier_list,
+    variant_consequence => $variant_consequence,
+    variant_consequence_list => $variant_consequence_list,
     restricted_mutation => $restricted_mutation,
     comments => $comments,
     publications => $publications,
@@ -417,6 +421,23 @@ sub get_mutation_consequence_flags {
 
 }
 
+sub get_variant_consequence {
+  my $self = shift; 
+  my $registry = $self->app->default('registry');
+  my $attribute_adaptor = $registry->get_adaptor('human', 'gene2phenotype', 'attribute');
+  my $variant_consequence = $attribute_adaptor->get_values_by_type("variant_consequence");
+  my @VC_tmpl = ();
+  foreach my $variant_consequence (sort keys %$variant_consequence){
+    my $attrib = $variant_consequence->{$variant_consequence};
+    push @VC_tmpl, {
+      VC_attrib_id => $attrib, 
+      VC_attrib_value => $variant_consequence
+    };
+  }
+  return \@VC_tmpl;
+}
+
+
 sub _get_confidence_category_list {
   my $self = shift;
   my $selected_confidence_category = shift;
@@ -549,6 +570,26 @@ sub get_cross_cutting_modifier_list {
   }
 
   return \@cross_cutting_modifier_list;
+}
+
+sub get_variant_consequence_list {
+  my $self = shift;
+  my $GFD = shift;
+  my @variant_consequence = split(',', $GFD->variant_consequence) if ($GFD->variant_consequence);
+  my $registry = $self->app->defaults('registry');
+  my $attribute_adaptor = $registry->get_adaptor('human', 'gene2phenotype', 'attribute');
+  my $variant_consequence_to_attrib = $attribute_adaptor->get_values_by_type('variant_consequence');
+  my @variant_consequence_list = ();
+  foreach my $value (sort keys %$variant_consequence_to_attrib) {
+    my $attrib = $variant_consequence_to_attrib->{$value};
+    my $selected = (grep $_ eq $value, @variant_consequence) ? 'selected' : '';
+    push @variant_consequence_list, {
+      attrib_id => $attrib,
+      attrib_value => $value, 
+      selected => $selected,
+    };
+  }
+  return \@variant_consequence_list;
 }
 
 sub get_publications {
