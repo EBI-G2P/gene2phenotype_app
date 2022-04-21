@@ -361,8 +361,8 @@ sub update_mutation_consequence {
   my $gene_symbol = $gfd->{gene_symbol};
   my $gf = $gf_model->fetch_by_gene_symbol($gene_symbol);
   if (!defined $mutation_consequence){
-    my $mutation_consequence_attrib_id = $self->param('mutation_consequence_attrib_id');
-    $mutation_consequence = $gfd_model->get_value('mutation_consequence', $mutation_consequence_attrib_id);
+    my $mutation_consequence_attribs_id = join(',', sort@{$self->every_param('mutation_consequence_attrib_id')});
+    $mutation_consequence = $gfd_model->get_value('mutation_consequence', $mutation_consequence_attribs_id);
   }
   my $email = $self->session('email');
   if ($mutation_consequence eq $gfd->{mutation_consequence}) {

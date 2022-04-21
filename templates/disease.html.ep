@@ -4,7 +4,7 @@
 
     <% if ($disease->{mim}) { %> 
       <dl>
-        <dt>MIM</dt>
+        <dt>OMIM</dt>
         <dd>
           <% if ($disease->{mim}) { 
             my $link = "http://omim.org/entry/" . $disease->{mim}; %>        
@@ -13,6 +13,23 @@
         </dd>
       </dl>
     <% } %>
+      <dl>
+        <dd>
+          <%foreach my $ontology (@{$disease->{ontologies}}) { %>
+            <% if (defined($ontology->{ontology_accession})) { %>
+              <dt>MONDO</dt>
+              <dd>
+                <% if ($ontology->{ontology_accession}) {
+                  my $old_ontology = $ontology->{ontology_accession};
+                  $old_ontology =~ s/:/_/;
+                  my $link = "http://purl.obolibrary.org/obo/" . $old_ontology; %>
+                  <%= link_to $link => begin %><%= $old_ontology %> <% end %>   
+                <% } %>
+              </dd>
+             <% } %>
+           <% } %>
+        </dd>
+      </dl>
     <% if ($logged_in) { %>
       <div class="show_toggle_view_button">
         <input type="button" name="show_edit_content" value="Edit Disease Attributes" class="btn btn-primary btn-sm edit"/>

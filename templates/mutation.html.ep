@@ -1,21 +1,21 @@
 %= include 'header'
 %= include 'search'
 <div class="container">
-  %= form_for '/gene2phenotype/gfd/mutation_consequence/update' => (class => 'form-horizontal', id => 'update_mutation_consequece') => begin
+  %= form_for '/gene2phenotype/gfd/mutation_consequence/update' => (class => 'form-horizontal', id => 'update_mutation_consequence') => begin
      <div class="form-group">
-      <label class="col-sm-4 control-label">Mutation consequence:<p><span class="badge"><%= $gfd->{mutation_consequence} %></p></label>
+          <label class="col-sm-4 control-label">Mutation consequence:
+          % for (split /,/, $gfd->{mutation_consequence}){
+            <p><span class="badge"><%= $_ %></p>
+          % }
+          </label>
       <div class="col-sm-8">
         <% foreach my $mc ( @{$mutation_consequences} ) { %>
           <% if (my $mutation_consequence = stash 'mutation_consequence') { %>
-            <% if ($mutation_consequence eq $mc->[0]) { %>
-              %= radio_button  mutation_consequence_attrib_id => $mc->[1], selected => "selected"
-            <% } else { %>
-              %= radio_button mutation_consequence_attrib_id => $mc->[1]
-            <% } %>
+            %= check_box  mutation_consequence_attrib_id => $mc->{MC_attrib_id}, selected => "selected"
           <% } else { %>
-             %= radio_button mutation_consequence_attrib_id => $mc->[1] 
+             %= check_box mutation_consequence_attrib_id => $mc->{MC_attrib_id}
           <% } %>
-          <%= $mc->[0] %>
+          <%= $mc->{MC_attrib_value} %>
           %= tag 'br'
         <% } %>
       </div>

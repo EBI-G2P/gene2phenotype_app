@@ -45,7 +45,7 @@
      <input id="button" type="submit" value="Update" class="btn btn-primary btn-sm" style="float: right;"/>
    %end
 
-   %= form_for '/gene2phenotype/gfd/mutation_consequence/update' => (class => 'form-horizontal', id => 'update_mutation_consequece') => begin
+   %= form_for '/gene2phenotype/gfd/mutation_consequence/update' => (class => 'form-horizontal', id => 'update_mutation_consequence') => begin
      <div class="form-group">
       <label class="col-sm-2 control-label">Mutation consequence:<p><span class="label label-info"><%= $gfd->{mutation_consequence} %></p></label>
       <div class="col-sm-10">

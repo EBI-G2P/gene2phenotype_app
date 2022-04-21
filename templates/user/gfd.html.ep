@@ -25,7 +25,9 @@
         % }
       % }
       <dt>Mutation consequence summary</dt>
-      <dd><p><span class="badge"><%= $gfd->{mutation_consequence} %></p></dd>
+      % for (split /,/, $gfd->{mutation_consequence}) {
+        <dd><p><span class="badge"><%= $_ %></p></dd>
+      % }
       % if ($gfd->{mutation_consequence_flag}){
         <dt>Mutation consequences flag</dt> 
         <dd><p><span class="label label-info"><%= $gfd->{mutation_consequence_flag} %></span></p></dd>
@@ -37,7 +39,7 @@
         % if ( $gfd->{variant_consequence} ) {
           <dt>Variant consequence</dt>
           % for (split /,/, $gfd->{variant_consequence} ) {
-            <dd><p><span class= "label label-warning"><%= $_ %></span></p></dd>
+            <dd><p><span class= "badge"><%= $_ %></span></p></dd>
           % }
         % }
     </dl>

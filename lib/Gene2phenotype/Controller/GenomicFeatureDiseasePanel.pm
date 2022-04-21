@@ -45,7 +45,7 @@ use warnings;
                      disease_name                   - Disease name representing the disease in the GFD
                      confidence_attrib_id           - Confidence attrib for the GFDPanel
                      allelic_requirement_attrib_id  - Allelic requirement attrib of the GFD. Can be more than one.
-                     mutation_consequence_attrib_id - Mutation consequence attrib of the GFD
+                     mutation_consequence_attrib_id - Mutation consequence attrib of the GFD. Can be more than one
 
                    Add exisiting GFD to target panel button:
                      add_existing_entry_to_panel  - This is set to 1 if the GFD is already in the database
@@ -74,7 +74,7 @@ sub add {
   my $disease_name                   = $self->param('disease_name');
   my $confidence_attrib_id           = $self->param('confidence_attrib_id');
   my $allelic_requirement_attrib_ids = join(',', sort @{$self->every_param('allelic_requirement_attrib_id')});
-  my $mutation_consequence_attrib_id = $self->param('mutation_consequence_attrib_id');
+  my $mutation_consequence_attrib_ids = join(',', sort @{$self->every_param('mutation_consequence_attrib_id')});
 
   my $email = $self->session('email');
   my $gfd_model = $self->model('genomic_feature_disease');  
@@ -108,7 +108,7 @@ sub add {
   }
   # Find exisiting GFDs with the same gene symbol, allelic requirement and mutation consequence
   my $gfds = $gfd_model->fetch_all_by_GenomicFeature_constraints($gf, {
-    'mutation_consequence_attrib' => $mutation_consequence_attrib_id,
+    'mutation_consequence_attrib' => $mutation_consequence_attrib_ids,
     'allelic_requirement_attrib' => $allelic_requirement_attrib_ids,
   });
   if (scalar @$gfds == 0) {
@@ -134,7 +134,7 @@ sub add {
       # User can then choose to add an exisiting GFD to the target panel
       # Or create a new GFD and add the new GFD to the target panel
       my $allelic_requirement_to_be_added = $gfd_model->get_value('allelic_requirement', $allelic_requirement_attrib_ids);
-      my $mutation_consequence_to_be_added = $gfd_model->get_value('mutation_consequence', $mutation_consequence_attrib_id);
+      my $mutation_consequence_to_be_added = $gfd_model->get_value('mutation_consequence', $mutation_consequence_attrib_ids);
       my $confidence_value_to_be_added = $gfd_model->get_value('confidence_category', $confidence_attrib_id);
       my $user = $user_model->fetch_by_email($email);
       my @panels = split(',', $user->panel);
@@ -182,8 +182,8 @@ sub create_gfd {
   }
   my $mutation_consequence = $self->param('mutation_consequence_to_be_added');
   if (!defined $mutation_consequence) {
-    my $mutation_consequence_attrib_id = $self->param('mutation_consequence_attrib_id');
-    $mutation_consequence = $gfd_model->get_value('mutation_consequence', $mutation_consequence_attrib_id);
+    my $mutation_consequence_attrib_ids = join(',', sort @{$self->every_param('mutation_consequence_attrib_id')});
+    $mutation_consequence = $gfd_model->get_value('mutation_consequence', $mutation_consequence_attrib_ids);
   }
 
   my $gfd = $gfd_model->add(

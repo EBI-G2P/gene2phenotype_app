@@ -26,13 +26,32 @@ sub fetch_by_dbID {
   my $disease = $disease_adaptor->fetch_by_dbID($dbID);
   my $name = $disease->name;
   my $mim = $disease->mim;
+  my $ontologies = $self->get_Ontology_accession($disease);
   return {
     disease_id => $dbID,
     name => $name,
     mim => $mim,
+    ontologies => $ontologies,
   };
 }
 
+sub get_Ontology_accession {
+  my $self = shift;
+  my $disease = shift;
+
+  my @ontologies = ();
+  my $registry = $self->app->defaults('registry');
+  my $disease_adaptor =  $registry->get_adaptor('human', 'gene2phenotype', 'Disease');
+  foreach my $do (@{$disease->get_DiseaseOntology}) {
+    my $ontology = $do->get_Ontology;
+    push @ontologies, {
+      ontology_accession => $ontology->ontology_accession,
+      ontology_term_id => $do->ontology_term_id,
+      disease_id => $do->disease_id,
+    };
+  }
+  return \@ontologies;
+}
 sub fetch_by_name {
   my $self = shift;
   my $name = shift;

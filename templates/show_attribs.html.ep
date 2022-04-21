@@ -8,7 +8,7 @@
   <div style="margin: 25px">
     <dl>
       <dt style="font-size:15px;">Allelic requirement:</dt>
-      <dd><p><span class="badge" style="font-size:15px"><%= $gfd->{allelic_requirement} %></p></dd>
+      <dd><p><span class="badge" style="font-size:13px"><%= $gfd->{allelic_requirement} %></p></dd>
       %= form_for '/gene2phenotype/gfd/update_allelic' => (class => 'form-horizontal', id => 'update_allelic_requirements') => begin
         %= hidden_field GFD_id => $gfd->{GFD_id}
         <input id="button" type="submit" value="EDIT" class="btn btn-primary btn-sm" style="margin-left: 1em;">
@@ -38,7 +38,9 @@
 
   <div style="margin: 25px">
       <dt style="font-size:15px">Mutation consequence summary</dt>
-      <dd><p><span class="badge" style="font-size:15px"><%= $gfd->{mutation_consequence} %></p></dd>
+      % for (split /,/, $gfd->{mutation_consequence}) {
+        <dd><p><span class="badge" style="font-size:13px"><%= $_ %></p></dd>
+      % }
        %= form_for '/gene2phenotype/gfd/update_mutation_con' => (class => 'form-horizontal', id => 'update_mutation_consequence_flag') => begin
         %= hidden_field GFD_id => $gfd->{GFD_id}
         <input id="button" type="submit" value="EDIT" class="btn btn-primary btn-sm" style="margin-left: 1em;">
