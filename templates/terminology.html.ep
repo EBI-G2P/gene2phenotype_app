@@ -107,6 +107,10 @@
       <th>imprinted</th>
       <td>Plausible disease-causing mutations identified in one allele in which the allele's parental origin determines the disease/phenotype exhibited.</td>
     </tr>
+    <tr>
+      <th>potential IF</th>
+      <td>Plausible disease-causing mutations within, affecting or encompassing the coding region of a single gene identified in multiple (&gt;3) unrelated cases/families with both the relevant disease (RD) and an incidental disorder.</td>
+    </tr>
   </table>
   <h4>Mutation consequence</h4>
   <table class="table">
@@ -133,6 +137,10 @@
     <tr>
       <th>cis-regulatory or promotor mutation</th>
       <td>Mutation in cis-regulatory elements that lies outwith the known transcription unit and promotor of the controlled gene.</td>
+    </tr>
+    <tr>
+      <th>decreased gene product level</th>
+      <td>Mutation that decreases the level of transcription of a gene</td>
     </tr>
     <tr>
       <th>uncertain</th>
@@ -170,5 +178,36 @@
       <td>restricted mutation set.</td>
     </tr>
   </table>
+
+  <h4>Variant consequence</h4>
+  <p>More information about these terms can be found on the <a href="http://www.sequenceontology.org/browser/obob.cgi">Sequence ontology website</a> </p>
+  <ul>
+    <li>splice_region_variant</li>
+    <li>splice_acceptor_variant</li>
+    <li>splice_donor_variant</li>
+    <li>start_lost</li>
+    <li>frameshift_variant</li>
+    <li>stop_gained</li>
+    <li>stop_lost</li>
+    <li>missense_variant</li>
+    <li>inframe_deletion</li>
+    <li>5_prime_UTR_variant</li>
+    <li>3_prime_UTR_variant</li>
+    <li>synonymous_variant</li>
+    <li>intron_variant</li>
+    <li>regulatory_region_variant</li>
+    <li>intergenic_variant</li>
+    <li>inframe_insertion</li>
+    <li>NMD_triggering</li>
+    <li>NMD_escaping</li>
+    <li>stop_gained_NMD_triggering</li>
+    <li>stop_gained_NMD_escaping</li>
+    <li>splice_donor_variant_NMD_triggering</li>
+    <li>frameshift_variant_NMD_triggering</li>
+    <li>splice_acceptor_variant_NMD_escaping</li>
+    <li>splice_acceptor_variant_NMD_triggering</li>
+    <li>splice_donor_variant_NMD_escaping</li>
+    <li>frameshift_variant_NMD_escaping</li>
+  </ul>
 </div>
 %= include 'footer'

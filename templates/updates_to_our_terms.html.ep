@@ -55,25 +55,15 @@
 
 <div class="container">
   <div class="alert alert-success" role="alert">
-    <h1>We have updated our terminology</h1>
-    <p>The <a href="https://thegencc.org/about.html">GenCC</a> develops consistent terminology for describing gene-disease validity. As part of the GenCC we aligned our existing terms to the new terminology.</p>
+    <h1>We have added more information to our curation efforts</h1>
     <p>Find out more about the update
-      <ul>
-        <li><a href="#confidence_value">Confidence value</a></li>
-        <li><a href="#allelic_requirement">Allelic requirement</a></li>
-        <li><a href="#mutation_consequence">Mutation consequence</a></li>
-      </ul>
       <p>We introduced a new category:
       <ul>
-        <li><a href="#cross_cutting_modifier">Cross cutting modifier</a></li>
+        <li><a href="#variant_consequence">Variant consequence</a></li>
       </ul>
-      <p>We introduced new flags which can be used for adding granularity in the curation process:
-      <ul>
-        <li><a href="#new_confidence_value_flag">Confidence value flag</a></li>
-        <li><a href="#new_mutation_consequence_flag">Mutation consequence flag</a></li>
-      </ul>
-    </p>
-    <h3>We moved our terminology on 02-12-2021</h3>
+      </p>
+    <p>We have new Cardiac data</p>
+    <h3>We moved our terminology to the GenCC terminology on 02-12-2021</h3>
     <p>Our download files only contains the new terminology. A final data export which was created on the 01-12-2021 uses our old terminology. Those files will remain available on our FTP site, but will not be updated anymore.</p>
     <p>Please direct any questions to <a href="mailto:g2p-help@ebi.ac.uk">g2p-help@ebi.ac.uk</a></p>
   </div>
@@ -136,6 +126,7 @@
       <li>typified by age related penetrance</li>
       <li>typified by reduced penetrance</li>
       <li>imprinted</li>
+      <li>potential_IF</li>
     </ul>
   </div>
 
@@ -286,10 +277,52 @@
       <td>Code with flag <span class="label label-info">part of contiguous genomic interval deletion</span></td>
     </tr>
     <tr>
+      <td>new term</td>
+      <td class="info">decreased gene product level</td>
+      <td></td>
+    </tr>
+    <tr>
       <td>uncertain</td>
       <td class="info">uncertain</td>
       <td></td>
     </tr>
   </table>
+
+
+  
+  <div class="alert alert-info" role="alert">
+    <a name="variant_consequence"></a>
+    <h3>NEW: Variant consequence</h3>
+    <h4>More information about these terms can be found on the <a href="http://www.sequenceontology.org/browser/obob.cgi">Sequence ontology website</a> </h4>
+    <ul>
+      <li>splice_region_variant</li>
+      <li>splice_acceptor_variant</li>
+      <li>splice_donor_variant</li>
+      <li>start_lost</li>
+      <li>frameshift_variant</li>
+      <li>stop_gained</li>
+      <li>stop_lost</li>
+      <li>missense_variant</li>
+      <li>inframe_deletion</li>
+      <li>5_prime_UTR_variant</li>
+      <li>3_prime_UTR_variant</li>
+      <li>synonymous_variant</li>
+      <li>intron_variant</li>
+      <li>regulatory_region_variant</li>
+      <li>intergenic_variant</li>
+      <li>inframe_insertion</li>
+      <li>NMD_triggering</li>
+      <li>NMD_escaping</li>
+      <li>stop_gained_NMD_triggering</li>
+      <li>stop_gained_NMD_escaping</li>
+      <li>splice_donor_variant_NMD_triggering</li>
+      <li>frameshift_variant_NMD_triggering</li>
+      <li>splice_acceptor_variant_NMD_escaping</li>
+      <li>splice_acceptor_variant_NMD_triggering</li>
+      <li>splice_donor_variant_NMD_escaping</li>
+      <li>frameshift_variant_NMD_escaping</li>
+    </ul>
+  </div>
+  
 </div>
 %= include 'footer'
