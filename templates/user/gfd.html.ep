@@ -24,7 +24,7 @@
           <dd><p><span class="label label-info"><%= $_ %></span></p></dd>
         % }
       % }
-      <dt>Mutation consequence summary</dt>
+      <dt title="The high level term for all variant classes that are established as disease-causing">Mutation consequence summary</dt>
       % for (split /,/, $gfd->{mutation_consequence}) {
         <dd><p><span class="badge"><%= $_ %></p></dd>
       % }
@@ -37,7 +37,7 @@
     <dl>
       <br>
         % if ( $gfd->{variant_consequence} ) {
-          <dt>Variant consequence</dt>
+          <dt title="The specific variant classes previously reported as pathogenic in the literature">Variant consequence</dt>
           % for (split /,/, $gfd->{variant_consequence} ) {
             <dd><p><span class= "badge"><%= $_ %></span></p></dd>
           % }

@@ -180,6 +180,7 @@
   </table>
 
   <h4>Variant consequence</h4>
+  <p>The specific variant classes previously reported as pathogenic in the literature.</p>
   <p>More information about these terms can be found on the <a href="http://www.sequenceontology.org/browser/obob.cgi">Sequence ontology website</a> </p>
   <ul>
     <li>splice_region_variant</li>
