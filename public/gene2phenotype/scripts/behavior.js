@@ -108,7 +108,7 @@ $(document).ready(function(){
   $('.tm_variants_table').DataTable();
 
   var index;
-  var panels = ["DD", "Cancer", "Ear", "Prenatal", "Eye", "Skin", "NeonatalRespiratory", "Rapid_PICU_NICU", "Demo", "PaedNeuro"];
+  var panels = ["DD", "Cancer", "Ear", "Prenatal", "Eye", "Skin", "Neonatal", "Rapid_PICU_NICU", "Demo", "PaedNeuro"];
   for (index = 0; index < panels.length; ++index) {
     $('#curator_table_' + panels[index]).DataTable();
   }
