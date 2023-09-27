@@ -112,6 +112,8 @@ sub fetch_all_by_substring {
 
   my $diseases = $disease_adaptor->fetch_all_by_substring($search_term);
   my @gfd_results = ();
+  my %keys;
+  my @gfd_no_dup = ();
   foreach my $disease ( sort { $a->name cmp $b->name } @$diseases) {
     my $gfds = $gfd_adaptor->fetch_all_by_Disease_panels($disease, $search_panels, $is_authorised);
     push @gfd_results, @{$self->_get_gfd_results($gfds)};
@@ -127,7 +129,17 @@ sub fetch_all_by_substring {
       }
     }
   }
-  return {gfd_results => \@gfd_results};
+
+  # Remove duplicates
+  foreach my $gfd (@gfd_results) {
+    my $key = $gfd->{dbID}."-".$gfd->{mechanism}."-".$gfd->{disease_name}."-".$gfd->{genotype}."-".$gfd->{gene_symbol}."-".$gfd->{panels};
+    if(!defined $keys{$key}) {
+      push @gfd_no_dup, $gfd;
+      $keys{$key} = 1;
+    }
+  }
+
+  return {gfd_results => \@gfd_no_dup};
 
 }
 
