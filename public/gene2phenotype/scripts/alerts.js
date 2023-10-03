@@ -83,9 +83,13 @@ $(document).ready(function(){
   });
 
   $('#add_gfd_form').submit(function(event){
-    var gene_name = $('#add_gfd_form').find('input[name="gene_name"]').val();
-    var disease_name = $('#add_gfd_form').find('input[name="disease_name"]').val();
+    var gene_name = $('#add_gfd_form').find('input[name="gene_symbol"]').val().trim();
+    var disease_name = $('#add_gfd_form').find('input[name="disease_name"]').val().trim();
+    var mondo = $('#add_gfd_form').find('input[name="mondo"]').val().trim();
     var count_checked_genotypes =  $('#add_gfd_form').find('input[name="allelic_requirement_attrib_id"]:checked').length;
+    var count_mutation_consequence = $('#add_gfd_form').find('input[name="mutation_consequence_attrib_id"]:checked').length;
+    var publications = $('#add_gfd_form').find('input[name="publications"]').val().trim();
+    
  
     if (gene_name == '') {
       event.preventDefault();
@@ -101,12 +105,42 @@ $(document).ready(function(){
       $(".alert_add_gfd_form").removeClass("alert alert-danger").addClass("alert alert-danger");
       return 0;
     }
+    if (mondo.length !== 0) {
+      var isValidmondo = mondo.startsWith("MONDO:");
+      if (!isValidmondo) {
+        event.preventDefault();
+        $(".alert_add_gfd_form").empty();
+        $(".alert_add_gfd_form").append("Please enter a valid MONDO id e.g MONDO:1234.");
+        $(".alert_add_gfd_form").removeClass("alert alert-danger").addClass("alert alert-danger");
+        return 0;
+      }
+    }
     if (count_checked_genotypes == 0) {
       event.preventDefault();
       $(".alert_add_gfd_form").empty();
       $(".alert_add_gfd_form").append("Please select a genotype.");
       $(".alert_add_gfd_form").removeClass("alert alert-danger").addClass("alert alert-danger");
       return 0;
+    }
+    if (count_mutation_consequence == 0) {
+      event.preventDefault();
+      $(".alert_add_gfd_form").empty();
+      $(".alert_add_gfd_form").append("Please select a mutation consequence.");
+      $(".alert_add_gfd_form").removeClass("alert alert-danger").addClass("alert alert-danger");
+      return 0;
+    }
+    if (publications.length !== 0) {
+      publications_list = publications.split(",");
+      for (var i = 0; i < publications_list.length; i++) {
+        var isValid = Number.isInteger(Number.parseInt(publications_list[i], 10));
+        if (!isValid) {
+          event.preventDefault();
+          $(".alert_add_gfd_form").empty();
+          $(".alert_add_gfd_form").append("Please enter a valid PMID e.g 16116424 or 16116424,9804340.");
+          $(".alert_add_gfd_form").removeClass("alert alert-danger").addClass("alert alert-danger");
+          return 0;
+        }
+      }
     }
     return 1;
   });

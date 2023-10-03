@@ -19,12 +19,7 @@ package Gene2phenotype::Model::GenomicFeatureDiseasePublication;
 use Mojo::Base 'MojoX::Model';
 
 sub add_publication {
-  my $self = shift;
-  my $GFD_id = shift;
-  my $email = shift;
-  my $source = shift;
-  my $pmid = shift;
-  my $title = shift;
+  my ($self, $GFD_id, $email, $source, $pmid, $title) = @_;
 
   my $registry = $self->app->defaults('registry');  
   my $GFDPublication_adaptor = $registry->get_adaptor('human', 'gene2phenotype', 'GenomicFeatureDiseasePublication');
@@ -37,17 +32,18 @@ sub add_publication {
   if ($pmid) {
     $publication = $publication_adaptor->fetch_by_PMID($pmid); 
   } else {
-    $publication = $publication_adaptor->fetch_by_title($title); 
+    $publication = $publication_adaptor->fetch_by_title($title) if (defined ($title)); 
   }
 
   if (!$publication) {
     $publication = Bio::EnsEMBL::G2P::Publication->new(
       -pmid => $pmid,
-      -title => $title,
-      -source => $source,
+      -title => $title || undef,
+      -source => $source || undef,
     );
     $publication = $publication_adaptor->store($publication);
   }
+  
   my $GFDPublication = $GFDPublication_adaptor->fetch_by_GFD_id_publication_id($GFD_id, $publication->dbID);
   if (!$GFDPublication) {
     $GFDPublication = Bio::EnsEMBL::G2P::GenomicFeatureDiseasePublication->new(
@@ -73,6 +69,16 @@ sub delete {
   my $GFDPublication = $GFDPublication_adaptor->fetch_by_dbID($GFDPublication_id);  
   $GFDPublication_adaptor->delete($GFDPublication, $user);
 }
+
+sub fetch_by_pmid {
+  my $self = shift;
+  my $pmid = shift;
+  my $registry = $self->app->defaults('registry');
+  my $gfdp_adaptor = $registry->get_adaptor('human', 'gene2phenotype', 'Publication');
+  $pmid = $gfdp_adaptor->fetch_by_PMID($pmid);
+  return $pmid;
+}
+
 
 sub add_comment {
   my $self = shift;

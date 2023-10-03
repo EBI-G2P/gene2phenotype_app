@@ -20,6 +20,8 @@ package Gene2phenotype::Controller::GenomicFeatureDiseasePanel;
 use base qw(Gene2phenotype::Controller::BaseController);
 use strict;
 use warnings;
+use LWP::Simple;
+use XML::Simple;
 
 =head2 add
   Description: Add a GenomicFeatureDisease to a panel in the G2P database.
@@ -72,6 +74,8 @@ sub add {
   my $target_panel                   = $self->param('panel');
   my $gene_symbol                    = $self->param('gene_symbol');
   my $disease_name                   = $self->param('disease_name');
+  my $publication                    = $self->param('publications');
+  my $mondo                          = $self->param('mondo');
   my $confidence_attrib_id           = $self->param('confidence_attrib_id');
   my $allelic_requirement_attrib_ids = join(',', sort @{$self->every_param('allelic_requirement_attrib_id')});
   my $mutation_consequence_attrib_ids = join(',', sort @{$self->every_param('mutation_consequence_attrib_id')});
@@ -79,9 +83,13 @@ sub add {
   my $cross_cutting_modifier_attrib_ids = join(',', sort @{$self->every_param('cross_cutting_modifier_attrib_id')});
   my $variant_consequence_attrib_ids = join(',', sort @{$self->every_param('variant_consequence_attrib_id')});
   
+
   my $email = $self->session('email');
   my $gfd_model = $self->model('genomic_feature_disease');  
   my $gfd_panel_model = $self->model('genomic_feature_disease_panel');
+
+  $mondo = undef if (defined($mondo) && $mondo !~ /MONDO:\d+$/);
+
   my $user_model = $self->model('user');
 
   if (defined $self->param('add_existing_entry_to_panel') && $self->param('add_existing_entry_to_panel') == 1) {
@@ -141,7 +149,9 @@ sub add {
     my $gfd = $self->create_gfd();
     my $gfd_id = $gfd->dbID;
     $self->add_gfd_to_panel($gfd_id);
-    return;
+    $self->add_publication($gfd_id, $email, $publication);
+    $disease_model->add_disease_ontology($mondo, $disease_name) if (defined $mondo) && defined ($disease);
+    return; 
   } else {
     # Check if a GFD with same gene symbol, allelic requirement, mutation consequence and disease name exists
     my $existing_gfds = _get_existing_gfds($gfds, $disease->dbID, $target_panel);
@@ -238,8 +248,9 @@ sub create_gfd {
     my $mutation_consequence_attrib_ids = join(',', sort @{$self->every_param('mutation_consequence_attrib_id')});
     $mutation_consequence = $gfd_model->get_value('mutation_consequence', $mutation_consequence_attrib_ids);
   }
+  
   my $cross_cutting_modifier;
-  if ( defined ($self->every_param('cross_cutting_modifier_attrib_id'))) {
+  if ( defined ($self->every_param('cross_cutting_modifier_attrib_id')) && @{$self->every_param('cross_cutting_modifier_attrib_id')} != 0 ) {
     $cross_cutting_modifier = $self->param('cross_cutting_modifier_to_be_added');
     if (!defined $cross_cutting_modifier) {
       my $cross_cutting_modifier_attrib_ids = join(',', sort @{$self->every_param('cross_cutting_modifier_attrib_id')});
@@ -249,10 +260,13 @@ sub create_gfd {
       else {
          $cross_cutting_modifier = $gfd_model->get_value('cross_cutting_modifier', $cross_cutting_modifier_attrib_ids);
       }
+    }  
+    else {
+        my $cross_cutting_modifier = undef;
     }
   }
   my $mutation_consequence_flags;
-  if ( defined ($self->every_param('mutation_consequence_flag_attrib_id'))) {
+  if ( defined ($self->every_param('mutation_consequence_flag_attrib_id')) && @{$self->every_param('mutation_consequence_flag_attrib_id')} != 0) {
     $mutation_consequence_flags = $self->param('mutation_consequence_flags_to_be_added');
     if (!defined $mutation_consequence_flags) {
       my $mutation_consequence_flag_attrib_ids = join(',', sort @{$self->every_param('mutation_consequence_flag_attrib_id')});
@@ -262,10 +276,13 @@ sub create_gfd {
       else {
          $mutation_consequence_flags = $gfd_model->get_value('mutation_consequence_flag', $mutation_consequence_flag_attrib_ids);
       }
+    } 
+    else {
+      my $mutation_consequence_flags = undef;
     }
   }
   my $variant_consequence;
-  if ( defined ($self->every_param('variant_consequence_attrib_id'))) {
+  if ( defined ($self->every_param('variant_consequence_attrib_id'))  && @{$self->every_param('variant_consequence_attrib_id')} != 0) {
     $variant_consequence = $self->param('variant_consequence_to_be_added');
     if (!defined $variant_consequence) {
       my $variant_consequence_attrib_ids = join(',', sort @{$self->every_param('variant_consequence_attrib_id')});
@@ -275,8 +292,12 @@ sub create_gfd {
       else {
          $variant_consequence = $gfd_model->get_value('variant_consequence', $variant_consequence_attrib_ids);
       }
+    } 
+    else {
+      my $variant_consequence = undef;
     }
   }
+
   my $gfd = $gfd_model->add(
     $self->param('gene_symbol'),
     $self->param('disease_name'),
@@ -478,4 +499,27 @@ sub delete {
   return $self->redirect_to("/gene2phenotype/gfd?GFD_id=$GFD_id");
 }
 
+sub add_publication {
+  my $self = shift; 
+  my $gfd_id = shift;
+  my $email = shift;
+  my $publication = shift; 
+
+  $publication = undef if ($publication !~ /\d$/);
+
+  my $gfd_publication_model = $self->model('genomic_feature_disease_publication');
+  
+  if (defined $publication) {
+    foreach my $id (split (/,/, $publication)) {
+      my $url = 'https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=:' . $id;
+      my $content = get($url);  
+      my $xml_content = XMLin($content);
+      my $title = $xml_content->{resultList}->{result}->{title};
+      my $result_hash = $xml_content->{resultList}->{result};
+      $title = $xml_content->{resultList}->{result}->{$id}->{title} if (!defined($title)) && (scalar(keys %{$result_hash}) > 1);
+      $gfd_publication_model->add_publication($gfd_id, $email, undef, $id, $title) if defined ($title); 
+    }
+  }
+
+}
 1;

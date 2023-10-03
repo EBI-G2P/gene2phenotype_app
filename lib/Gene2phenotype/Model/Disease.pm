@@ -17,6 +17,8 @@ limitations under the License.
 =cut
 package Gene2phenotype::Model::Disease;
 use Mojo::Base 'MojoX::Model';
+use HTTP::Tiny;
+use JSON;
 
 sub fetch_by_dbID {
   my $self = shift;
@@ -72,6 +74,57 @@ sub add {
     -adaptor => $disease_adaptor,
   );
   $disease = $disease_adaptor->store($disease);
+}
+
+sub add_disease_ontology {
+  my $self = shift;
+  my $disease_mondo = shift; 
+  my $disease_name = shift; 
+
+  my $registry = $self->app->defaults('registry');
+  my $ontology_adaptor = $registry->get_adaptor('human', 'gene2phenotype', 'OntologyTerm');
+  my $disease_ontology_adaptor = $registry->get_adaptor('human', 'gene2phenotype', 'DiseaseOntology');
+   
+  my $disease = $self->fetch_by_name($disease_name);
+  my $disease_id = $disease->dbID;
+  my $ontology_term = $ontology_adaptor->fetch_by_accession($disease_mondo);
+
+
+  my $http = HTTP::Tiny->new();
+  my $url = "https://www.ebi.ac.uk/ols4/api/search?q=" . $disease_mondo . "&ontology=mondo&exact=1";
+  my $response = $http->get($url, 
+             {headers => { 'Content-type' => 'application/xml' }
+  });
+  my $result = JSON->new->decode($response->{content});
+  
+  if (($result->{response}->{numFound} == 1) && (!$ontology_term)) {
+    my $ontology = Bio::EnsEMBL::G2P::OntologyTerm->new (
+      -ontology_accession => $disease_mondo,
+      -adaptor => $ontology_adaptor,
+    );
+    $ontology = $ontology_adaptor->store($ontology);
+
+    my $DiseaseOntology = $disease_ontology_adaptor->fetch_by_disease_id_ot_id($disease_id, $ontology->dbID);
+    if (!$DiseaseOntology) {
+      $DiseaseOntology = Bio::EnsEMBL::G2P::DiseaseOntology->new(
+        -disease_id => $disease_id,
+        -ontology_term_id => $ontology->dbID,
+        -adaptor => $disease_ontology_adaptor,
+      );
+      $disease_ontology_adaptor->store($DiseaseOntology);
+    }
+  } elsif (($result->{response}->{numFound} == 1) && (defined ($ontology_term))) {
+    my $DiseaseOntology = $disease_ontology_adaptor->fetch_by_disease_id_ot_id($disease_id, $ontology_term->dbID);
+    if (!$DiseaseOntology) {
+      $DiseaseOntology = Bio::EnsEMBL::G2P::DiseaseOntology->new(
+        -disease_id => $disease_id,
+        -ontology_term_id => $ontology_term->dbID,
+        -adaptor => $disease_ontology_adaptor,
+      );
+      $disease_ontology_adaptor->store($DiseaseOntology);
+    }
+  }
+
 }
 
 sub already_in_db {

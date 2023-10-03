@@ -317,76 +317,7 @@ sub add {
 
   my $user_adaptor = $registry->get_adaptor('human', 'gene2phenotype', 'user');
   my $gfd;
-  if ($variant_consequence eq '' && $mutation_consequence_flags eq '' && $cross_cutting_modifier eq '') {
-    $gfd =  Bio::EnsEMBL::G2P::GenomicFeatureDisease->new(
-      -disease_id => $disease->dbID,
-      -genomic_feature_id => $genomic_feature->dbID,
-      -mutation_consequence => $mutation_consequence,
-      -allelic_requirement => $allelic_requirement,
-      -cross_cutting_modifier => undef,
-      -mutation_consequence_flag => undef,
-      -variant_consequence => undef,
-      -adaptor => $GFD_adaptor,
-    );
-  } elsif ($variant_consequence ne '' && $mutation_consequence_flags eq '' && $cross_cutting_modifier eq '') {
-    $gfd =  Bio::EnsEMBL::G2P::GenomicFeatureDisease->new(
-      -disease_id => $disease->dbID,
-      -genomic_feature_id => $genomic_feature->dbID,
-      -mutation_consequence => $mutation_consequence,
-      -allelic_requirement => $allelic_requirement,
-      -variant_consequence =>  $variant_consequence,
-      -adaptor => $GFD_adaptor,
-    );
-  } elsif ($cross_cutting_modifier ne '' && $variant_consequence eq '' && $mutation_consequence_flags eq '') {
-    $gfd =  Bio::EnsEMBL::G2P::GenomicFeatureDisease->new(
-      -disease_id => $disease->dbID,
-      -genomic_feature_id => $genomic_feature->dbID,
-      -mutation_consequence => $mutation_consequence,
-      -allelic_requirement => $allelic_requirement,
-      -cross_cutting_modifier => $cross_cutting_modifier,
-      -adaptor => $GFD_adaptor,
-    );
-  } elsif ($mutation_consequence_flags ne '' && $cross_cutting_modifier eq '' && $variant_consequence eq '' ){
-    $gfd =  Bio::EnsEMBL::G2P::GenomicFeatureDisease->new(
-      -disease_id => $disease->dbID,
-      -genomic_feature_id => $genomic_feature->dbID,
-      -mutation_consequence => $mutation_consequence,
-      -allelic_requirement => $allelic_requirement,
-      -mutation_consequence_flag => $mutation_consequence_flags,
-      -adaptor => $GFD_adaptor,
-    );
-  } elsif ($mutation_consequence_flags ne '' && $cross_cutting_modifier ne '' && $variant_consequence eq '') {
-    $gfd =  Bio::EnsEMBL::G2P::GenomicFeatureDisease->new(
-      -disease_id => $disease->dbID,
-      -genomic_feature_id => $genomic_feature->dbID,
-      -mutation_consequence => $mutation_consequence,
-      -allelic_requirement => $allelic_requirement,
-      -mutation_consequence_flag => $mutation_consequence_flags,
-      -cross_cutting_modifier => $cross_cutting_modifier,
-      -adaptor => $GFD_adaptor,
-    );
-  } elsif ($mutation_consequence_flags ne '' && $variant_consequence ne '' && $cross_cutting_modifier eq '') {
-    $gfd =  Bio::EnsEMBL::G2P::GenomicFeatureDisease->new(
-      -disease_id => $disease->dbID,
-      -genomic_feature_id => $genomic_feature->dbID,
-      -mutation_consequence => $mutation_consequence,
-      -allelic_requirement => $allelic_requirement,
-      -mutation_consequence_flag => $mutation_consequence_flags,
-      -variant_consequence => $variant_consequence,
-      -adaptor => $GFD_adaptor,
-    );
-  } elsif ($cross_cutting_modifier ne '' && $variant_consequence ne '' && $mutation_consequence_flags eq '') {
-    $gfd =  Bio::EnsEMBL::G2P::GenomicFeatureDisease->new(
-      -disease_id => $disease->dbID,
-      -genomic_feature_id => $genomic_feature->dbID,
-      -mutation_consequence => $mutation_consequence,
-      -allelic_requirement => $allelic_requirement,
-      -cross_cutting_modifier => $cross_cutting_modifier,
-      -variant_consequence =>  $variant_consequence,
-      -adaptor => $GFD_adaptor,
-    );
-  } else {
-    $gfd =  Bio::EnsEMBL::G2P::GenomicFeatureDisease->new(
+  $gfd =  Bio::EnsEMBL::G2P::GenomicFeatureDisease->new(
       -disease_id => $disease->dbID,
       -genomic_feature_id => $genomic_feature->dbID,
       -mutation_consequence => $mutation_consequence,
@@ -395,8 +326,7 @@ sub add {
       -cross_cutting_modifier => $cross_cutting_modifier,
       -variant_consequence =>  $variant_consequence,
       -adaptor => $GFD_adaptor,
-    );
-  }
+  );
   
   my $user = $user_adaptor->fetch_by_email($email);
   $gfd = $GFD_adaptor->store($gfd, $user);
@@ -711,10 +641,10 @@ sub get_publications {
     my $title = $publication->title;
     my $source = $publication->source;
     
-    if (!($title)) {
+    if (!($title) && (defined $pmid)) {
       my $server = 'https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=ext_id:';
       my $format = "&format=json";
-      my $request = $server . $pmid . $format;
+      my $request = $server . $pmid . $format ;
       my $response = $http->get($request);
       warn "Failed!\n" unless $response->{success};
       my $result = $response->{content};
@@ -722,7 +652,8 @@ sub get_publications {
       # Access the "title" field
       $title = $decoded_json->{'resultList'}->{'result'}->[0]->{'title'};
     }
-    $title .= " ($source)" if ($source);
+
+    $title .= " ($source)" if (($source) && ($title));
 
     push @publications, {
       comments => \@comments,

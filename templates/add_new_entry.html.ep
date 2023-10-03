@@ -27,6 +27,13 @@
     </div>
 
     <div class="form-group">
+      <label class="col-sm-2 control-label">Disease Accession</label>
+      <div class="col-sm-10">
+          <input id="query_disease_mondo" type="text" name="mondo" placeholder="Type in MONDO linked with this disease e.g MONDO:1234" class="form-control">
+      </div>
+    </div>
+
+    <div class="form-group">
       <label class="col-sm-2 control-label">Allelic requirement</label>
       <div class="col-sm-10">
         <% foreach my $AR (@{$allelic_requirements}) { %>
@@ -149,6 +156,13 @@
             <% } %>
           <% } %>
         </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Publication</label>
+      <div class="col-sm-10">
+          <input id="query_publication" type="text" name="publications" placeholder="Type in PMID associated with this gene-disease e.g 16116424 or 16116424,9804340" class="form-control">
       </div>
     </div>
 
