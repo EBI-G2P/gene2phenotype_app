@@ -9,7 +9,7 @@
     </tr>
     <tr>
       <th>Definitive</th>
-      <td>The role of this gene in this particular disease has been repeatedly demonstrated in both the research and clinical diagnostic settings and has been repeatedly demonstrated in both the research and clinical diagnostic settings, and has been upheld over time (at least 2 independent publication over 3 years' time). No convincing evidence has emerged that contradicts the role of the gene in the specified disease. <b>(previously labelled as confirmed)</b>.</td>
+      <td>The role of this gene in this particular disease has been repeatedly demonstrated in both the research and clinical diagnostic settings, and has been upheld over time (at least 2 independent publication over 3 years' time). No convincing evidence has emerged that contradicts the role of the gene in the specified disease. <b>(previously labelled as confirmed)</b>.</td>
     </tr>
     <tr>
       <th>Strong</th>
@@ -17,11 +17,11 @@
     </tr>
     <tr>
       <th>Moderate</th>
-      <td>There is moderate evidence in humans to support a casual role for this gene in this disease with no contradictory eveidence. The body of evidence is not large (e.g possibly only one key paper) but appears convincing enough that the gene-disease pair is likely to be validated with additional evidence in the near future.</td>
+      <td>There is moderate evidence in humans to support a causal role for this gene in this disease with no contradictory evidence. The body of evidence is not large (e.g possibly only one key paper) but appears convincing enough that the gene-disease pair is likely to be validated with additional evidence in the near future.</td>
     </tr>
     <tr>
       <th>Limited</th>
-      <td>Little human evidence exists to support a casual role for this gene in this disease, but not all evidence has been refuted. For example, there may be a collection of rare missense variants in humans but without convincing functional impact, segegration data that could either arise by chance (e.g across one or two meioses) or does not implicate a single gene, or functional data without direct recapitulation of the phenotype. Overall, the body of evidence does not meet contemporary criteria for claiming a valid association with disease. The majority are probably false associations. <b>(previously labelled as possible).</b></td>
+      <td>Little human evidence exists to support a causal role for this gene in this disease, but not all evidence has been refuted. For example, there may be a collection of rare missense variants in humans but without convincing functional impact, segregation data that could either arise by chance (e.g across one or two meioses) or does not implicate a single gene, or functional data without direct recapitulation of the phenotype. Overall, the body of evidence does not meet contemporary criteria for claiming a valid association with disease. The majority are probably false associations. <b>(previously labelled as possible).</b></td>
     </tr>
   </table>
   
@@ -41,7 +41,7 @@
     </tr>
     <tr>
       <th>monoallelic_autosomal</th>
-      <td>Plausible disease-causing mutations on an autosomal chromsome identified on one allele in all or the vast majority of with specific disorder.</td>
+      <td>Plausible disease-causing mutations on an autosomal chromosome identified on one allele in all or the vast majority of with specific disorder.</td>
     </tr>
     <tr>
       <th>monoallelic_X_hem</th>
@@ -49,7 +49,7 @@
     </tr>
     <tr>
       <th>monoallelic_Y_hem</th>
-      <td>Plausible disease-causing mutations identified in an allele found in the Y chromosome. The Y chromsome is passed from father to son as this mutation may affect only males.</td>
+      <td>Plausible disease-causing mutations identified in an allele found in the Y chromosome. The Y chromosome is passed from father to son as this mutation may affect only males.</td>
     </tr>
     <tr>
       <th>monoallelic_X_het</th>
@@ -61,11 +61,11 @@
     </tr>
     <tr>
       <th>mitochondrial</th>
-      <td>Plausible disease-causing mutations identified on mitochondial DNA where homoplasmy or heteroplasmy are associated with a specific disorder.</td>
+      <td>Plausible disease-causing mutations identified on mitochondrial DNA where homoplasmy or heteroplasmy are associated with a specific disorder.</td>
     </tr>
     <tr>
       <th>biallelic_autosomal</th>
-      <td>Plausible disease-causing homozygous or compound heterozygous mutations identified on both alleles in the autosomal chromsome.</td>
+      <td>Plausible disease-causing homozygous or compound heterozygous mutations identified on both alleles in the autosomal chromosome.</td>
     </tr>
     <tr>
       <th>biallelic_PAR</th>
@@ -120,11 +120,11 @@
     </tr>
     <tr>
       <th>5_prime or 3_prime UTR mutation</th>
-      <td>mutations located in the untranslated regions. These regions may change regulatory mechanisms which in turn modify cellular processes and molecular pathways increasing disease risk. </td>
+      <td>Mutations located in the untranslated regions. These regions may change regulatory mechanisms which in turn modify cellular processes and molecular pathways increasing disease risk. </td>
     </tr>
     <tr>
       <th>altered gene product structure</th>
-      <td>mutations that alter the structure of the gene, changes the expression of the gene causing it to be activated or expressed at higher levels. It also modifies the gene product function.</td>
+      <td>Mutations that alter the structure of the gene, changes the expression of the gene causing it to be activated or expressed at higher levels. It also modifies the gene product function.</td>
     </tr>
     <tr>
       <th>absent gene product</th>
@@ -135,8 +135,8 @@
       <td>Mutation that increases the functional dosage of a gene. Increases the expression of the gene.</td>
     </tr>
     <tr>
-      <th>cis-regulatory or promotor mutation</th>
-      <td>Mutation in cis-regulatory elements that lies outwith the known transcription unit and promotor of the controlled gene.</td>
+      <th>cis-regulatory or promoter mutation</th>
+      <td>Mutation in cis-regulatory elements that lies outwith the known transcription unit and promoter of the controlled gene.</td>
     </tr>
     <tr>
       <th>decreased gene product level</th>
@@ -161,13 +161,13 @@
           <li>Location falls in the last exon of the transcript.</li>
           <li>Location is in the 50bp towards the end of the second to the last exon.</li>
           <li>Found in an intronless transcript.</li>
-          <li>Location is in the first 100 base pairs of the coding sequence.</li>
+          <li>Location is in the first 100bp of the coding sequence.</li>
         </ul>
       </td>
     </tr>
     <tr>
       <th>part of contiguous gene duplication </th>
-      <td>creates extra copies of gene which may results in different copy numbers of a gene thereby altering gene dosage.</td>
+      <td>Creates extra copies of gene which may results in different copy numbers of a gene thereby altering gene dosage.</td>
     </tr>
     <tr>
       <th>part of contiguous genomic interval deletion</th>
@@ -179,7 +179,7 @@
     </tr>
     <tr>
       <th>activating</th>
-      <td>Mutation usually missense that results in a constituative functional activation of the gene product.</td>
+      <td>Usually a missense mutation that results in a constitutive functional activation of the gene product.</td>
     </tr>
     <tr>
       <th>dominant negative</th>
