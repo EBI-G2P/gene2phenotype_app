@@ -12,6 +12,7 @@ requires 'Mojolicious::Plugin::RemoteAddr';
 requires 'namespace::autoclean';
 requires 'Moose', '2.2011';
 requires 'XML::RSS::Parser';
+requires 'XML::Simple';
 requires 'FileHandle';
 requires 'HTTP::Tiny';
 requires 'IO::Socket::SSL';
