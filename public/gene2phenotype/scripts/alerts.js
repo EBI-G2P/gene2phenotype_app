@@ -106,13 +106,38 @@ $(document).ready(function(){
       return 0;
     }
     if (mondo.length !== 0) {
-      var isValidmondo = mondo.startsWith("MONDO:");
-      if (!isValidmondo) {
+      var isValidMondo = /^MONDO[_:][0-9]+$/.test(mondo);
+      if (!isValidMondo) {
         event.preventDefault();
         $(".alert_add_gfd_form").empty();
-        $(".alert_add_gfd_form").append("Please enter a valid MONDO id e.g MONDO:1234.");
+        $(".alert_add_gfd_form").append("Please enter a valid MONDO id e.g MONDO:1234 or MONDO_1234");
         $(".alert_add_gfd_form").removeClass("alert alert-danger").addClass("alert alert-danger");
         return 0;
+      } else {
+        $.ajax({
+          url: "https://www.ebi.ac.uk/ols4/api/terms?id="+mondo,
+          dataType: "json",
+          type: "get",
+          success: function(data) {
+            if(data?.page?.totalElements === 0) {
+              event.preventDefault();
+              $(".alert_add_gfd_form").empty();
+              $(".alert_add_gfd_form").append("Please enter a valid MONDO id e.g MONDO:1234 or MONDO_1234");
+              $(".alert_add_gfd_form").removeClass("alert alert-danger").addClass("alert alert-danger");
+              return 0;
+            }
+          },
+          error: function(jqXHR, textStatus, errorThrown){
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+            event.preventDefault();
+            $(".alert_add_gfd_form").empty();
+            $(".alert_add_gfd_form").append("Please enter a valid MONDO id e.g MONDO:1234 or MONDO_1234");
+            $(".alert_add_gfd_form").removeClass("alert alert-danger").addClass("alert alert-danger");
+            return 0;
+          }
+        });
       }
     }
     if (count_checked_genotypes == 0) {
