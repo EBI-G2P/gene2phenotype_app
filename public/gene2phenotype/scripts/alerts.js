@@ -155,15 +155,40 @@ $(document).ready(function(){
       return 0;
     }
     if (publications.length !== 0) {
-      publications_list = publications.split(",");
+      var publications_list = publications.split(",");
       for (var i = 0; i < publications_list.length; i++) {
         var isValid = Number.isInteger(Number.parseInt(publications_list[i], 10));
         if (!isValid) {
           event.preventDefault();
           $(".alert_add_gfd_form").empty();
-          $(".alert_add_gfd_form").append("Please enter a valid PMID e.g 16116424 or 16116424,9804340.");
+          $(".alert_add_gfd_form").append("Please enter a valid PMID e.g 16116424 or 16116424,9804340");
           $(".alert_add_gfd_form").removeClass("alert alert-danger").addClass("alert alert-danger");
           return 0;
+        } else {
+          $.ajax({
+            url: "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query="+publications_list[i]+"&format=json",
+            dataType: "json",
+            type: "get",
+            success: function(data) {
+              if(Array.isArray(data?.resultList?.result) && data.resultList.result.length == 0) {
+                event.preventDefault();
+                $(".alert_add_gfd_form").empty();
+                $(".alert_add_gfd_form").append("Please enter a valid PMID e.g 16116424 or 16116424,9804340");
+                $(".alert_add_gfd_form").removeClass("alert alert-danger").addClass("alert alert-danger");
+                return 0;
+              }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              console.log(jqXHR);
+              console.log(textStatus);
+              console.log(errorThrown);
+              event.preventDefault();
+              $(".alert_add_gfd_form").empty();
+              $(".alert_add_gfd_form").append("Please enter a valid PMID e.g 16116424 or 16116424,9804340");
+              $(".alert_add_gfd_form").removeClass("alert alert-danger").addClass("alert alert-danger");
+              return 0;
+            }
+          });
         }
       }
     }
