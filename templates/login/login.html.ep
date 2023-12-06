@@ -19,4 +19,5 @@
   %= link_to 'Forgot password?' => '/gene2phenotype/login/recovery'
 
 </div>
+%= include 'alerts'
 %= include 'footer'
