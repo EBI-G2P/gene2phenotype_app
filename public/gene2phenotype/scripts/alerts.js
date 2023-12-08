@@ -166,11 +166,11 @@ $(document).ready(function(){
           return 0;
         } else {
           $.ajax({
-            url: "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query="+publications_list[i]+"&format=json",
+            url: "https://www.ebi.ac.uk/europepmc/webservices/rest/article/MED/"+publications_list[i]+"?format=json",
             dataType: "json",
             type: "get",
             success: function(data) {
-              if(Array.isArray(data?.resultList?.result) && data.resultList.result.length == 0) {
+              if(data?.result && Object.keys(data.result).length === 0) {
                 event.preventDefault();
                 $(".alert_add_gfd_form").empty();
                 $(".alert_add_gfd_form").append("Please enter a valid PMID e.g 16116424 or 16116424,9804340");
