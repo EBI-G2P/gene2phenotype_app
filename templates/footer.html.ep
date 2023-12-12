@@ -3,7 +3,7 @@
     <div class="container">
       <div class="container">
         <ul class="bs-docs-footer-links text-muted">
-          <li>Copyright © EMBL-EBI 2021</li>
+          <li>Copyright © EMBL-EBI 2023</li>
           <li>&middot;</li>
           <li>
             %= link_to Contact  => '/gene2phenotype/help'
@@ -39,8 +39,8 @@
             <% end %>
           </li>
           <li>
-            <%= link_to 'http://www.thetgmi.org/' => begin %>
-              %= image '/gene2phenotype/images/TGMI.png', alt => 'TGMI', width => '40%', height => 'auto' 
+            <%= link_to 'https://paradigmgenomics.org/' => begin %>
+              %= image '/gene2phenotype/images/PARADIGM.png', alt => 'PARADIGM', width => '40%', height => 'auto' 
             <% end %>
           </li>
           <li>
