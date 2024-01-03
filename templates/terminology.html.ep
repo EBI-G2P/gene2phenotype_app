@@ -4,26 +4,24 @@
   <h4>G2P confidence</h4>
   <table class="table">
     <tr>
-      <th>Category</th>
-      <th>Description</th>
-    </tr>
-    <tr>
-      <th>Definitive</th>
+      <th style="white-space:nowrap;">Definitive <span style="height:10px;width:10px;background-color:green;border-radius:50%;display:inline-block;"></span></th>
       <td>The role of this gene in this particular disease has been repeatedly demonstrated in both the research and clinical diagnostic settings, and has been upheld over time (at least 2 independent publication over 3 years' time). No convincing evidence has emerged that contradicts the role of the gene in the specified disease. <b>(previously labelled as confirmed)</b>.</td>
     </tr>
     <tr>
-      <th>Strong</th>
+      <th style="white-space:nowrap;">Strong <span style="height:10px;width:10px;background-color:green;border-radius:50%;display:inline-block;"></span></th>
       <td>The role of this gene as a monogenic cause of disease has been repeatedly and independently demonstrated providing very strong convincing evidence in humans and no conflicting evidence for this gene's role in this disease. <b>(previously labelled as probable)</b></td>
     </tr>
     <tr>
-      <th>Moderate</th>
+      <th style="white-space:nowrap;">Moderate <span style="height:10px;width:10px;background-color:green;border-radius:50%;display:inline-block;"></span></th>
       <td>There is moderate evidence in humans to support a causal role for this gene in this disease with no contradictory evidence. The body of evidence is not large (e.g possibly only one key paper) but appears convincing enough that the gene-disease pair is likely to be validated with additional evidence in the near future.</td>
     </tr>
     <tr>
-      <th>Limited</th>
+      <th style="white-space:nowrap;">Limited <span style="height:10px;width:10px;background-color:red;border-radius:50%;display:inline-block;"></span></th>
       <td>Little human evidence exists to support a causal role for this gene in this disease, but not all evidence has been refuted. For example, there may be a collection of rare missense variants in humans but without convincing functional impact, segregation data that could either arise by chance (e.g across one or two meioses) or does not implicate a single gene, or functional data without direct recapitulation of the phenotype. Overall, the body of evidence does not meet contemporary criteria for claiming a valid association with disease. The majority are probably false associations. <b>(previously labelled as possible).</b></td>
     </tr>
   </table>
+  <p><span style="height:10px;width:10px;background-color:green;border-radius:50%;display:inline-block;"></span> Operationally several groups use <b>Definitive</b>, <b>Strong</b> and <b>Moderate</b> for clinical reporting.</p>
+  <p><span style="height:10px;width:10px;background-color:red;border-radius:50%;display:inline-block;"></span> Not used for clinical reporting.</p>
   
   <h4>Confidence value flag</h4>
   <table class="table">
