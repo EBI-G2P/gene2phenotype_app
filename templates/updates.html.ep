@@ -26,7 +26,11 @@
             <strong>Mutation consequence:</strong>
             <em><%== $entry->{mechanism} %></em>
             <strong>Disease:</strong>
+            <% if (index(lc $entry->{disease_name}, lc $entry->{gene_symbol}) != -1) { %>
             <em><%== $entry->{disease_name} %></em>
+            <% } else { %>
+            <em><%= $entry->{gene_symbol} %>-related <%= $entry->{disease_name} %></em>
+            <% } %>
           <% end %>
         %= end
       </li>

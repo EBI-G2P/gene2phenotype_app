@@ -32,7 +32,11 @@
             <td><%= $gfd->{gene_symbol} %></td>
             <td><%= $gfd->{genotype} %></td>
             <td><%= $gfd->{mechanism} %></td>
+            <% if (index(lc $gfd->{disease_name}, lc $gfd->{gene_symbol}) != -1) { %>
             <td><%= $gfd->{disease_name} %></td>
+            <% } else { %>
+            <td><%= $gfd->{gene_symbol} %>-related <%= $gfd->{disease_name} %></td>
+            <% } %>
             <td><%= $gfd->{panels} %></td>
             <td>
               %= form_for '/gene2phenotype/gfd' => (id => $gfd->{dbID}) => begin
