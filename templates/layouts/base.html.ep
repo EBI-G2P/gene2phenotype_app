@@ -10,7 +10,7 @@
 %= stylesheet '/gene2phenotype/css/docs.min.css'
 %= stylesheet '/gene2phenotype/css/jquery.dataTables.min.css'
 %= stylesheet '/gene2phenotype/scripts/jstree/themes/default/style.min.css'
-%= javascript '/gene2phenotype/scripts/jquery-1.12.4.min.js'
+%= javascript '/gene2phenotype/scripts/jquery-3.5.0.min.js'
 %= javascript '/gene2phenotype/scripts/jquery-ui.min.js'
 %= javascript '/gene2phenotype/scripts/bootstrap.min.js'
 %= javascript '/gene2phenotype/scripts/d3.min.js'
