@@ -22,6 +22,8 @@ use strict;
 use warnings;
 use LWP::Simple;
 use XML::Simple;
+use XML::LibXML;
+
 
 =head2 add
   Description: Add a GenomicFeatureDisease to a panel in the G2P database.
@@ -499,6 +501,7 @@ sub delete {
   return $self->redirect_to("/gene2phenotype/gfd?GFD_id=$GFD_id");
 }
 
+
 sub add_publication {
   my $self = shift; 
   my $gfd_id = shift;
@@ -513,13 +516,13 @@ sub add_publication {
     foreach my $id (split (/,/, $publication)) {
       my $url = 'https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=:' . $id;
       my $content = get($url);  
-      my $xml_content = XMLin($content);
-      my $title = $xml_content->{resultList}->{result}->{title};
-      my $result_hash = $xml_content->{resultList}->{result};
-      $title = $xml_content->{resultList}->{result}->{$id}->{title} if (!defined($title)) && (scalar(keys %{$result_hash}) > 1);
+      my $parser = XML::LibXML->new();
+      my $xml_content = $parser->parse_string($content);
+      my $title = $xml_content->findvalue('//title');
+      my $result_hash = $xml_content->findvalue('//result/id');
+      $title = $xml_content->findvalue('//result/id/title') if (!defined($title)) && (scalar(keys %{$result_hash}) > 1);
       $gfd_publication_model->add_publication($gfd_id, $email, undef, $id, $title) if defined ($title); 
     }
   }
-
 }
 1;
