@@ -32,7 +32,7 @@
       <% foreach my $phenotype (@{$gfd->{phenotypes}}) { %>
         <div class="phenotype_list">
           <div class="align_left">
-            <% my $url = "https://hpo.jax.org/app/browse/term/" . $phenotype->{stable_id}; %>
+            <% my $url = "https://hpo.jax.org/browse/term/" . $phenotype->{stable_id}; %>
             %= link_to $phenotype->{name} => $url => (target => '_blank')
           </div>
           <div class="align_right">

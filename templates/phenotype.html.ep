@@ -10,7 +10,7 @@
   <ul>
     <% foreach my $phenotype (@{$gfd->{phenotypes}}) { %>
       <li>
-        <% my $url = "https://hpo.jax.org/app/browse/term/" . $phenotype->{stable_id}; %>
+        <% my $url = "https://hpo.jax.org/browse/term/" . $phenotype->{stable_id}; %>
         %= link_to $phenotype->{name} => $url => (target => '_blank')
       </li>
     <% } %>
