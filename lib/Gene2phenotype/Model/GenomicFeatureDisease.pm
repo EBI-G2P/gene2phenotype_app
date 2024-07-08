@@ -809,8 +809,9 @@ sub update_disease {
   my $registry = $self->app->defaults('registry');
   my $disease_adaptor =  $registry->get_adaptor('human', 'gene2phenotype', 'Disease');
   my $disease = $disease_adaptor->fetch_by_dbID($disease_id);
-  if ($disease->name ne $disease_name || ($disease->mim && $disease->mim ne $disease_mim)) {
 
+  if ($disease->name ne $disease_name || ($disease->mim && $disease->mim ne $disease_mim)
+      || (!$disease->mim && $disease_mim)) {
     my $GFD_adaptor = $registry->get_adaptor('human', 'gene2phenotype', 'GenomicFeatureDisease');
     my $user_adaptor = $registry->get_adaptor('human', 'gene2phenotype', 'user');
     my $user = $user_adaptor->fetch_by_email($email);
