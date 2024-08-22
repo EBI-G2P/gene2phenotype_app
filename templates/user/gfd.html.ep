@@ -4,6 +4,9 @@
 
   <h3 class="title">Gene: <span class="text-primary"><i><%= $gfd->{gene_symbol} %></i></span> Disease: <span class="text-primary"><i><% if (index(lc $gfd->{disease_name}, lc $gfd->{gene_symbol}) != -1) { %><%= $gfd->{disease_name} %><% } else { %><%= $gfd->{gene_symbol} %>-related <%= $gfd->{disease_name} %><% } %></i></span></h3>
   <div class="clear"></div>
+
+  %= include 'alerts'
+
   <div class="show_db_content">
     % my $found = 0;
      <% foreach my $gfd_panel (@{$gfd->{gfd_panels}}) { %>
@@ -35,7 +38,7 @@
         % }
       % }
     </dl>
-    
+
     <dl>
       <br>
         % if ( $gfd->{variant_consequence} ) {

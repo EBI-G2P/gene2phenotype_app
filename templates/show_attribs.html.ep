@@ -33,8 +33,6 @@
       %end
    % }
   </div>
-  
-
 
   <div style="margin: 25px">
       <dt style="font-size:15px">Mutation consequence summary</dt>
@@ -47,7 +45,6 @@
      %end
   </div>
  
-
   <div style="margin: 25px" >
     % if ($gfd->{mutation_consequence_flag}) {
       <dt style=font-size:15px>Mutation consequence flag</dt> 
@@ -86,10 +83,12 @@
   %end
 % } 
 </div>
-  
- <div style="margin: 25px" >
-   %= form_for '/gene2phenotype/gfd' => begin
-     %= hidden_field GFD_id => $gfd->{GFD_id}
-     <input id="button" type="submit" value="BACK" class="btn btn-primary btn-sm" style="float: left;">
-   %end
- </div>
+
+%= include 'alerts'
+
+<div style="margin: 25px" >
+  %= form_for '/gene2phenotype/gfd' => begin
+    %= hidden_field GFD_id => $gfd->{GFD_id}
+    <input id="button" type="submit" value="BACK" class="btn btn-primary btn-sm" style="float: left;">
+  %end
+</div>
