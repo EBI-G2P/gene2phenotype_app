@@ -337,7 +337,6 @@ sub update_mutation_consequence_temp {
 
   $self->stash(gfd => $gfd);
 
-
   my $mutation_consequences =  $gfd_model->get_mutation_consequences;
   $self->stash(mutation_consequences => $mutation_consequences);
   
@@ -366,19 +365,24 @@ sub update_mutation_consequence {
   my $gf_model = $self->model('genomic_feature');
   my $gene_symbol = $gfd->{gene_symbol};
   my $gf = $gf_model->fetch_by_gene_symbol($gene_symbol);
+
   if (!defined $mutation_consequence){
     my $mutation_consequence_attribs_id = join(',', sort@{$self->every_param('mutation_consequence_attrib_id')});
     $mutation_consequence = $gfd_model->get_value('mutation_consequence', $mutation_consequence_attribs_id);
   }
+
   my $email = $self->session('email');
   if ($mutation_consequence eq $gfd->{mutation_consequence}) {
     $self->feedback_message('SELECTED_MUTATION_CONSEQ');
     return $self->redirect_to("/gene2phenotype/gfd/show_attribs?GFD_id=$GFD_id");
   }
+
   my $gfds = $gfd_model->fetch_all_by_GenomicFeature_constraints($gf, {
     'mutation_consequence' => $mutation_consequence,
-    'allelic_requirement' => $gfd->{allelic_requirement},
+    'allelic_requirement'  => $gfd->{allelic_requirement},
+    'disease_id'           => $gfd->{disease_id}
   });
+
   if (scalar @$gfds == 0) {
     $gfd_model->update_mutation_consequence($email, $GFD_id, $mutation_consequence);
     $self->session(last_url => "/gene2phenotype/gfd/show_attribs?GFD_id=$GFD_id");
@@ -421,7 +425,6 @@ sub update_mutation_consequence_flag_temp {
   }
 
   $self->stash(gfd => $gfd);
-
 
   my $mutation_consequence_flags = $gfd_model->get_mutation_consequence_flags;
   $self->stash(mutation_consequence_flags => $mutation_consequence_flags);
@@ -482,8 +485,6 @@ sub update_variant_consequence_temp {
   my $gfd;
   my $authorised_panels = $self->stash('authorised_panels');
   my $logged_in = 0;
-
-
   my $gfd_model = $self->model('genomic_feature_disease');
   my $disease_model = $self->model('disease');
   if ($self->session('logged_in')) {
@@ -520,6 +521,7 @@ sub update_variant_consequence {
   my $logged_in = 1;
   my $authorized_panels = $self->stash('authorized_panels');
   $gfd = $model->fetch_by_dbID($GFD_id, $logged_in, $authorized_panels);
+
   if (!defined $variant_consequence) {
     my $variant_consequence_attrib_ids = join(',', sort@{$self->every_param('variant_consequence_attrib_id')});
     $variant_consequence = $model->get_value('variant_consequence', $variant_consequence_attrib_ids);
