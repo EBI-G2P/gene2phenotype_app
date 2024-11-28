@@ -280,6 +280,7 @@ sub startup {
     my @authorised_panels = @{$c->stash('authorised_panels')};
     my $panel_name = $file_name;
     $panel_name =~ s/G2P\.csv\.gz//;
+    $panel_name =~ s/_/ /; # "Hearing_loss" to "Hearing loss"
     $file_name =~ s/\.csv\.gz//;
 
     # Can the user download data for the specified panel?
