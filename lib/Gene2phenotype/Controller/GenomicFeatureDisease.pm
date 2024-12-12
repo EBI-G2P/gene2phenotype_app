@@ -232,7 +232,7 @@ sub update_allelic_requirement {
   }
   else {
     $self->feedback_message("GFD_ALREADY_EXISTS");
-    return $self->redirect_to("/gene2phenotype/gfd/ahow_attribs?GFD_id=$GFD_id");
+    return $self->redirect_to("/gene2phenotype/gfd/show_attribs?GFD_id=$GFD_id");
   }
 }
 
