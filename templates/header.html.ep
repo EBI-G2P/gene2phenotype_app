@@ -36,10 +36,6 @@
           <li>
             %= link_to 'Account' => '/gene2phenotype/account'
           </li>
-        <% } else { %>
-          <li>
-            %= link_to 'Sign in' => '/gene2phenotype/login'
-          </li>
         <% } %>
       </ul>
     </div>
