@@ -1,4 +1,27 @@
 <div class="container">
+
+  <div class="alert alert-info" style="margin-top: 20px" role="alert">
+    <h3 class="alert-heading" style="margin-top: 0">Site switchover notice</h3>
+    The <strong>G2P website</strong>, established in 2014, has been redesigned
+    and is currently available in Beta mode
+    <a
+      href="https://www.ebi.ac.uk/gene2phenotype/beta/"
+      style="text-decoration: underline"
+      class="alert-link"
+      >here</a
+    >. <br />The new implementation reports more detailed gene-disease mechanism
+    information than previous and there are some terminology differences. The
+    data download format has also been updated. See
+    <a
+      href="https://ftp.ebi.ac.uk/pub/databases/gene2phenotype/README"
+      style="text-decoration: underline"
+      class="alert-link"
+      >this link</a
+    >
+    for more details or get in touch. <br />Switchover to the new site is
+    planned on <strong>26/02/2025</strong>.
+  </div>
+
 <blockquote>
   <p class="h4"><a href="http://europepmc.org/abstract/MED/31147538" target="_blank">Flexible and scalable diagnostic filtering of genomic variants using G2P with Ensembl VEP.</a></p>
   <p class="h5">Thormann A, Halachev M, McLaren W, Moore DJ, Svinti V, Campbell A, Kerr SM, Tischkowitz M, Hunt SE, Dunlop MG, Hurles ME, Wright CF, Firth HV, Cunningham F, FitzPatrick DR.</p>
