@@ -37,7 +37,7 @@
     <ul>
     <% foreach my $entry (@{$update->{updates}}) { %>
       <li>
-        %= form_for '/gene2phenotype/gfd' => (id => $entry->{GFD_ID}) => begin
+        %= form_for '/gene2phenotype/legacy/gfd' => (id => $entry->{GFD_ID}) => begin
           <%= link_to '#' => ( onclick => "document.getElementById($entry->{GFD_ID}).submit();") => begin %>
             %= hidden_field search_type => $entry->{search_type}
             %= hidden_field dbID => $entry->{GFD_ID}

@@ -4,7 +4,7 @@
   <div class="page-header">
     <h1>Gene: <span class="text-primary"><i><%=$gfd->{gene_symbol}%></i>  <small>Disease: <span class="text-primary"><i><% if (index(lc $gfd->{disease_name}, lc $gfd->{gene_symbol}) != -1) { %><%= $gfd->{disease_name} %><% } else { %><%= $gfd->{gene_symbol} %>-related <%= $gfd->{disease_name} %><% } %></i></span</small></h1>
   </div>
-  %= form_for '/gene2phenotype/gfd/allelic_requirement/update' => (class => 'form-horizontal', id => 'update_allelic_requirements') => begin
+  %= form_for '/gene2phenotype/legacy/gfd/allelic_requirement/update' => (class => 'form-horizontal', id => 'update_allelic_requirements') => begin
   <div class="form-group">
     <label class="col-sm-2 control-label">Allelic requirement:<p><span class="label label-info"><%= $gfd->{allelic_requirement} %></p></label>
     <div class="col-sm-10">
@@ -26,7 +26,7 @@
   <div class="alert_update_allele" role="alert">
   </div> 
 
-   %= form_for '/gene2phenotype/gfd/cross_cutting_modifier/update' => (class => 'form-horizontal', id => 'cross_cutting_modifiers') => begin
+   %= form_for '/gene2phenotype/legacy/gfd/cross_cutting_modifier/update' => (class => 'form-horizontal', id => 'cross_cutting_modifiers') => begin
    <div class="form-group">
       <label class="col-sm-2 control-label">Cross cutting modifier:<p><span class="label label-info"><%= $gfd->{cross_cutting_modifier} %></p></label>
       <div class="col-sm-10">
@@ -45,7 +45,7 @@
      <input id="button" type="submit" value="Update" class="btn btn-primary btn-sm" style="float: right;"/>
    %end
 
-   %= form_for '/gene2phenotype/gfd/mutation_consequence/update' => (class => 'form-horizontal', id => 'update_mutation_consequence') => begin
+   %= form_for '/gene2phenotype/legacy/gfd/mutation_consequence/update' => (class => 'form-horizontal', id => 'update_mutation_consequence') => begin
      <div class="form-group">
       <label class="col-sm-2 control-label">Mutation consequence:<p><span class="label label-info"><%= $gfd->{mutation_consequence} %></p></label>
       <div class="col-sm-10">
@@ -69,7 +69,7 @@
      <input id="button" type="submit" value="Update" class="btn btn-primary btn-sm" style="float: right;"/>
    %end
 
-     %= form_for '/gene2phenotype/gfd/mutation_consequence_flag/update' => (class => 'form-horizontal', id => 'mutation consequence flag') => begin
+     %= form_for '/gene2phenotype/legacy/gfd/mutation_consequence_flag/update' => (class => 'form-horizontal', id => 'mutation consequence flag') => begin
    <div class="form-group">
       <label class="col-sm-2 control-label">Mutation consequence flag:<p><span class="label label-info"><%= $gfd->{mutation_consequence_flag} %></p></label>
       <div class="col-sm-10">

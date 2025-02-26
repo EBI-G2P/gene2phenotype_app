@@ -8,7 +8,7 @@
   </div>
   <div class="show_edit_content">
     <h4>Add comment:</h4>
-    %= form_for '/gene2phenotype/gfd/comment/add' => begin
+    %= form_for '/gene2phenotype/legacy/gfd/comment/add' => begin
       <div class="form-group comment_text_area"><textarea class="form-control" name="GFD_comment" rows="3"></textarea></div>
       <div class="align_buttons_right">
         %= hidden_field GFD_id => $gfd->{GFD_id}
@@ -29,7 +29,7 @@
     <div class="comment">
       <div class="align_left"><p><%= $comment->{comment_text} %> (<%= $comment->{user} %> <%= $comment->{date} %>)</p></div>
       <div class="align_right">
-       %= form_for '/gene2phenotype/gfd/comment/delete' => begin
+       %= form_for '/gene2phenotype/legacy/gfd/comment/delete' => begin
         %= hidden_field GFD_comment_id => $comment->{GFD_comment_id}
         %= hidden_field GFD_id => $gfd->{GFD_id}
         <input id="button" type="submit" value="Delete Comment" class="btn btn-primary btn-sm confirm"/>

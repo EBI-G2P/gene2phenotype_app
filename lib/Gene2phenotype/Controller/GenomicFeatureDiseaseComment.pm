@@ -43,7 +43,7 @@ sub add {
 
   $self->feedback_message('EMPTY_COMMENT');
   
-  return $self->redirect_to("/gene2phenotype/gfd?GFD_id=$GFD_id");
+  return $self->redirect_to("/gene2phenotype/legacy/gfd?GFD_id=$GFD_id");
 }
 
 sub delete {
@@ -54,7 +54,7 @@ sub delete {
   my $model = $self->model('genomic_feature_disease_comment');
   $model->delete($GFD_comment_id, $email);
   $self->feedback_message('DELETED_COMMENT_SUC');
-  return $self->redirect_to("/gene2phenotype/gfd?GFD_id=$GFD_id");
+  return $self->redirect_to("/gene2phenotype/legacy/gfd?GFD_id=$GFD_id");
 }
 
 1;

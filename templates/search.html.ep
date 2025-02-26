@@ -1,12 +1,12 @@
 <div id="search" class="container">
 
 %= tag div => (id => 'panel_image') => begin
-<img src="/gene2phenotype/images/G2P-ALL.png" alt="panel_image" height="150" width="150">
+<img src="/gene2phenotype/legacy/images/G2P-ALL.png" alt="panel_image" height="150" width="150">
 % end
 
   <div id="search-body">
 
-    %= form_for '/gene2phenotype/search' => (id => 'search_field') => begin
+    %= form_for '/gene2phenotype/legacy/search' => (id => 'search_field') => begin
       %= tag div => (id => 'search_div_123a') => begin
         <label>Search panel </label>
         %= select_field panel => $panel_imgs, id => 'select_panel'

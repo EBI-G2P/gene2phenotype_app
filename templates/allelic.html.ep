@@ -1,7 +1,7 @@
 %= include 'header'
 %= include 'search'
 <div class="container"> 
-  %= form_for '/gene2phenotype/gfd/allelic_requirement/update' => (class => 'form-horizontal', id => 'update_allelic_requirements') => begin
+  %= form_for '/gene2phenotype/legacy/gfd/allelic_requirement/update' => (class => 'form-horizontal', id => 'update_allelic_requirements') => begin
   <div class="form-group">
     <label class="col-sm-4 control-label">Allelic requirement:<p><span class="badge"><%= $gfd->{allelic_requirement} %></p></label>
     <div class="col-sm-8">

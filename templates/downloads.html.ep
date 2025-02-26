@@ -10,18 +10,18 @@
         next if ($panel eq 'ALL');
         my $updated_panel = $panel;
         $updated_panel =~ s/ /_/g;
-        my $link = '/gene2phenotype/downloads/'. $updated_panel . 'G2P.csv.gz';
+        my $link = '/gene2phenotype/legacy/downloads/'. $updated_panel . 'G2P.csv.gz';
         my $description = $panel . ' gene-disease pairs and attributes (' . $panel . 'G2P.csv.gz)';
     %>
       <li>
         <%= link_to $link => begin %>
-          <%= $description %> <img src="/gene2phenotype/images/export.png" alt="export">
+          <%= $description %> <img src="/gene2phenotype/legacy/images/export.png" alt="export">
         <% end %>
       </li>
     <% } %>
   </ul>
   <div>
-    <p>Downloads are created on the fly to provide the latest information. For static release files see the <a href="http://ftp.ebi.ac.uk/pub/databases/gene2phenotype/" target="_blank">FTP site.</a></p>
+    <p>Downloads are created on the fly to provide the latest information. For static release files see the <a href="http://ftp.ebi.ac.uk/pub/databases/gene2phenotype/legacy/" target="_blank">FTP site.</a></p>
   </div>
   
 </div>

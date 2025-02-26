@@ -36,7 +36,7 @@
             </div>
             <% if ($logged_in && grep(/^$gfd->{panel}$/, @$panels)) { %>
               <div class="align_right">
-                %= form_for '/gene2phenotype/gfd/publication/delete_comment' => begin
+                %= form_for '/gene2phenotype/legacy/gfd/publication/delete_comment' => begin
                   %= hidden_field GFD_publication_comment_id => $comment->{GFD_publication_comment_id}
                   %= hidden_field GFD_id => $gfd->{GFD_id}
                   <input id="button" type="submit" value="Delete Comment" class="btn btn-primary btn-sm confirm"/>
@@ -46,7 +46,7 @@
           </div>
           <div class="clear"></div>
         <% } %>
-        %= form_for '/gene2phenotype/gfd/publication/delete' => begin
+        %= form_for '/gene2phenotype/legacy/gfd/publication/delete' => begin
           %= hidden_field GFD_publication_id => $publication->{GFD_publication_id}
           %= hidden_field GFD_id => $gfd->{GFD_id}
           <input type="button" type="submit" value="Delete Publication" class="btn btn-primary btn-sm confirm align_buttons_left"/>
@@ -56,7 +56,7 @@
         <div class="clear"></div>
         <div class='add_comment'>
           <h4>Add comment:</h4>
-          %= form_for '/gene2phenotype/gfd/publication/add_comment' => begin
+          %= form_for '/gene2phenotype/legacy/gfd/publication/add_comment' => begin
             <div class="comment_text_area"><textarea class="form-control" name="GFD_publication_comment" rows="3"></textarea></div>
             %= hidden_field GFD_publication_id => $publication->{GFD_publication_id}
             %= hidden_field GFD_id => $gfd->{GFD_id}

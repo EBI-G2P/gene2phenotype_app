@@ -3,7 +3,7 @@
 <div class="container">
 <h3>Copy a gene-disease pair from another panel</h3>
 <ol>
-  <li>Login on the website https://www.ebi.ac.uk/gene2phenotype/login</li>
+  <li>Login on the website https://www.ebi.ac.uk/gene2phenotype/legacy/login</li>
   <li>Search for your gene. Search works with autocomplete. All Ensembl genes are preloaded with their HGNC symbol. If you cannot find your gene, please contact <a href="mailto:g2p-help@ebi.ac.uk">g2p-help@ebi.ac.uk</a></li>
   <li>Under the Search results for your gene follow the link <mark>Add New Gene Disease Entry</mark></li>
 </ol>

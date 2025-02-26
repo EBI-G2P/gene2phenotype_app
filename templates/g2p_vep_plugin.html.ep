@@ -56,7 +56,7 @@
   <h4>To run the G2P VEP plugin add the following argument to the VEP command:</h4>
   <p>The file to be used for running G2P plugin is the panel file from G2P or PanelApp. The plugin can not be run without the file. </p>
   <p> 
-    %=image '/gene2phenotype/images/G2P_overview.png', alt => 'vep_g2p_plugin_overview', width => '85%', height => 'auto'
+    %=image '/gene2phenotype/legacy/images/G2P_overview.png', alt => 'vep_g2p_plugin_overview', width => '85%', height => 'auto'
   </p>
 
 
@@ -73,7 +73,7 @@
     <tbody>
       <tr>
         <th scope="row">file</th>
-        <td style="height:120px;width:1000px">Path to G2P data file. The file needs to be uncompressed.<br>- Download from http://www.ebi.ac.uk/gene2phenotype/downloads<br>- Download from PanelApp</td>
+        <td style="height:120px;width:1000px">Path to G2P data file. The file needs to be uncompressed.<br>- Download from http://www.ebi.ac.uk/gene2phenotype/legacy/downloads<br>- Download from PanelApp</td>
         <td>The plugin can not run without this data file.</td>
         <td>Data from this file is used in the filtering process. The text output and html output are also annotated with data from this file</td>
       </tr>
@@ -91,7 +91,7 @@
       </tr>
       <tr>
         <th scope="row">confidence_levels</th>
-        <td style="height:120px;width:1000px">We still support confidence levels of our old terminology. Confidence levels to include: definitive, strong, limited, moderate, confirmed, probable, possible, both RD and IF. Separate multiple values with '&'.<br> https://www.ebi.ac.uk/gene2phenotype/terminology</td>
+        <td style="height:120px;width:1000px">We still support confidence levels of our old terminology. Confidence levels to include: definitive, strong, limited, moderate, confirmed, probable, possible, both RD and IF. Separate multiple values with '&'.<br> https://www.ebi.ac.uk/gene2phenotype/legacy/terminology</td>
         <td>Supported values: definitive, strong, moderate, confirmed, probable, limited. By default the plugin reports: definitive, strong, moderate, confirmed, probable</td>
         <td>Confidence levels are used to determine which genes are used in the filtering process. The G2P confidence levels is reported in the HTML and text output.
             Some G2P entries have the flag "Requires clinical review", this is reported in the HTML and text output to show careful consideration of the results are required

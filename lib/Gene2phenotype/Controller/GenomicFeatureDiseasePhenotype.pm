@@ -61,7 +61,7 @@ sub add {
   }
   $self->add_phenotypes_message($info, \@values);
 
-  return $self->redirect_to("/gene2phenotype/gfd?GFD_id=$GFD_id#phenotypes");
+  return $self->redirect_to("/gene2phenotype/legacy/gfd?GFD_id=$GFD_id#phenotypes");
 }
 
 sub delete_from_tree {
@@ -87,7 +87,7 @@ sub update {
   my $model = $self->model('genomic_feature_disease_phenotype');
   $model->update_phenotype_list($GFD_id, $email, $phenotype_ids);
   $self->feedback_message('UPDATED_PHENOTYPES_SUC');
-  return $self->redirect_to("/gene2phenotype/gfd?GFD_id=$GFD_id#phenotypes");
+  return $self->redirect_to("/gene2phenotype/legacy/gfd?GFD_id=$GFD_id#phenotypes");
 }
 
 sub delete {
@@ -100,7 +100,7 @@ sub delete {
   my $phenotype_name = $GFDP->get_Phenotype->name;
   $model->delete($GFD_phenotype_id, $email);
   $self->edit_phenotypes_message('SUCC_DELETED_PHENOTYPE', $phenotype_name);
-  return $self->redirect_to("/gene2phenotype/gfd?GFD_id=$GFD_id#phenotypes");
+  return $self->redirect_to("/gene2phenotype/legacy/gfd?GFD_id=$GFD_id#phenotypes");
 }
 
 sub add_comment {
@@ -112,7 +112,7 @@ sub add_comment {
   my $model = $self->model('genomic_feature_disease_phenotype');
   $model->add_comment($GFD_phenotype_id, $GFD_phenotype_comment, $email);
   $self->feedback_message('ADDED_COMMENT_SUC');
-  return $self->redirect_to("/gene2phenotype/gfd?GFD_id=$GFD_id#phenotypes");
+  return $self->redirect_to("/gene2phenotype/legacy/gfd?GFD_id=$GFD_id#phenotypes");
 }
 
 sub delete_comment {
@@ -123,7 +123,7 @@ sub delete_comment {
   my $model = $self->model('genomic_feature_disease_phenotype');
   $model->delete_comment($GFD_phenotype_comment_id, $email);
   $self->feedback_message('DELETED_COMMENT_SUC');
-  return $self->redirect_to("/gene2phenotype/gfd?GFD_id=$GFD_id#phenotypes");
+  return $self->redirect_to("/gene2phenotype/legacy/gfd?GFD_id=$GFD_id#phenotypes");
 }
 
 

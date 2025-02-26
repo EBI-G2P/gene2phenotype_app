@@ -21,7 +21,7 @@
 
   <div id="update_pwd" class="container">
     <h3>Edit password</h3>
-    %= form_for '/gene2phenotype/account/update' => (method => 'POST') => (id => 'update_pwd_form') => begin
+    %= form_for '/gene2phenotype/legacy/account/update' => (method => 'POST') => (id => 'update_pwd_form') => begin
       <div class="form-group">
         <label>Current password</label>
         <fieldset>

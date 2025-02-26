@@ -1,7 +1,7 @@
 %= include 'header'
 %= include 'search'
 <div class="container">
-  %= form_for '/gene2phenotype/gfd/cross_cutting_modifier/update' => (class => 'form-horizontal', id => 'cross_cutting_modifiers') => begin
+  %= form_for '/gene2phenotype/legacy/gfd/cross_cutting_modifier/update' => (class => 'form-horizontal', id => 'cross_cutting_modifiers') => begin
    <div class="form-group">
       <label class="col-sm-4 control-label">Cross cutting modifier:
       % for (split /,/,  $gfd->{cross_cutting_modifier}){

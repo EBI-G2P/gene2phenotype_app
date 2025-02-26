@@ -62,7 +62,7 @@ $(document).ready(function(){
  
   $("#select_panel").change(function(){
     var value =  $(this).val(); 
-    var img_src = '/gene2phenotype/images/G2P-' + value + '.png';
+    var img_src = '/gene2phenotype/legacy/images/G2P-' + value + '.png';
     $('img[alt="panel_image"]').attr('src', img_src);
   }); 
 
@@ -72,7 +72,7 @@ $(document).ready(function(){
       delay: 0,
       source: function(request, response) {
         $.ajax({
-          url: "/gene2phenotype/ajax/autocomplete",
+          url: "/gene2phenotype/legacy/ajax/autocomplete",
           dataType: "json",
           data: {
             term : request.term,
@@ -266,7 +266,7 @@ $(document).ready(function(){
     } else {
       $(".next_step_add_publication").removeClass("hide_fields");
       $.ajax({
-        url: "/gene2phenotype/ajax/publication",
+        url: "/gene2phenotype/legacy/ajax/publication",
         dataType: "json",
         type: "get",
         data: {

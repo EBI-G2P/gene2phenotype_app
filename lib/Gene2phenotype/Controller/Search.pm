@@ -56,9 +56,9 @@ use base qw(Gene2phenotype::Controller::BaseController);
                template user/searchresults when logged in and
                template searchresults when not logged in.
                 
-  Exceptions : If nothing is provided as search_term we redirect to the homepage /gene2phenotype/. 
+  Exceptions : If nothing is provided as search_term we redirect to the homepage /gene2phenotype/legacy/. 
   Caller     : Template: search.html.ep 
-               Request: GET /gene2phenotype/search 
+               Request: GET /gene2phenotype/legacy/search 
                Params:
                    search_term - String that has been entered as input 
                    panel - The selected panel for which to return the search results
@@ -75,7 +75,7 @@ sub results {
   my $panel = $self->param('panel');
 
   if (!$search_term) {
-    return $self->redirect_to("/gene2phenotype/");
+    return $self->redirect_to("/gene2phenotype/legacy/");
   }
 
   my $search_type = $model->identify_search_type($search_term);
@@ -84,7 +84,7 @@ sub results {
   my $authorised_panels = $self->stash('authorised_panels');
 
   if (!grep {$panel eq $_} @$authorised_panels) {
-    return $self->redirect_to("/gene2phenotype/");
+    return $self->redirect_to("/gene2phenotype/legacy/");
   }
 
   my @search_panels = ();
@@ -108,7 +108,7 @@ sub results {
 
   $self->stash(search_results => $search_results);
   $self->stash(search_term => $search_term);
-  $self->session(last_url => "/gene2phenotype/search?panel=$panel&search_term=$search_term");
+  $self->session(last_url => "/gene2phenotype/legacy/search?panel=$panel&search_term=$search_term");
 
   if ($logged_in) {
     $self->render(template => 'user/searchresults');

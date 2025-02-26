@@ -3,7 +3,7 @@
 <div class="container">
 
   <h3><%=$duplicated_gfds->{gene_symbol}%>, <%=$duplicated_gfds->{genotype}%>, <%=$duplicated_gfds->{mechanism}%></h3>
-  %= form_for '/gene2phenotype/gfd/merge_duplicated_LGM' => begin 
+  %= form_for '/gene2phenotype/legacy/gfd/merge_duplicated_LGM' => begin 
     <% foreach my $gfd (@{$duplicated_gfds->{entries}}) { %>
       <div class="form-group">
         %= check_box gfd_id => $gfd->{gfd_id}, checked => undef

@@ -1,7 +1,7 @@
 %= include 'header'
 %= include 'search'
 <div class="container">
- %= form_for '/gene2phenotype/gfd/mutation_consequence_flag/update' => (class => 'form-horizontal', id => 'mutation consequence flag') => begin
+ %= form_for '/gene2phenotype/legacy/gfd/mutation_consequence_flag/update' => (class => 'form-horizontal', id => 'mutation consequence flag') => begin
    <div class="form-group">
       <label class="col-sm-4 control-label">Mutation consequence flag:
        % for (split /,/, $gfd->{mutation_consequence_flag}) {

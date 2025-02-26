@@ -18,7 +18,7 @@
             <td> <%= $gfd->{gene_symbol} %> </td>
             <td> <%= $gfd->{disease_name} %> </td>
             <td>
-              <% my $url = '/gene2phenotype/gfd/?search_type=gfd&dbID=' . $gfd->{GFD_id}; %>
+              <% my $url = '/gene2phenotype/legacy/gfd/?search_type=gfd&dbID=' . $gfd->{GFD_id}; %>
               %= link_to 'Go to G2P entry' => $url
             </td>
           </tr>

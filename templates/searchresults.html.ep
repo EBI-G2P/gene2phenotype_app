@@ -31,7 +31,7 @@
             <% } %>
             <td><%= $gfd->{panels} %></td>
             <td>
-              %= form_for '/gene2phenotype/gfd' => (id => $gfd->{dbID}) => begin
+              %= form_for '/gene2phenotype/legacy/gfd' => (id => $gfd->{dbID}) => begin
                 %= hidden_field dbID => $gfd->{dbID}
                 <input id="button" type="submit" value="Go to page" class="btn btn-primary btn-sm"/>
               % end

@@ -30,7 +30,7 @@ Once you started curating your panel you can download the annotations and use it
 
   <div class="panel panel-default">
     <figure>
-      %= image '/gene2phenotype/images/enter_new_entry_gencc.png', alt => 'enter_new_entry', width => '100%'
+      %= image '/gene2phenotype/legacy/images/enter_new_entry_gencc.png', alt => 'enter_new_entry', width => '100%'
       <figcaption>Interface for entering a new gene disease association.</figcaption>
     </figure>
   </div>
@@ -55,7 +55,7 @@ Once you started curating your panel you can download the annotations and use it
 
   <div class="panel panel-default">
     <figure>
-      %= image '/gene2phenotype/images/enter_new_entry_flowchart.png', alt => 'enter_new_entry_flowchart', width => '100%'
+      %= image '/gene2phenotype/legacy/images/enter_new_entry_flowchart.png', alt => 'enter_new_entry_flowchart', width => '100%'
       <figcaption>Flowchart describing how a potential new entry is compared against existing entries in the database to decide if the potential new entry needs to be created or if it already exists and can be added to the target panel or is already present in the target panel.</figcaption>
     </figure>
   </div>
@@ -66,19 +66,19 @@ Once you started curating your panel you can download the annotations and use it
   </p>
   <div class="panel panel-default">
     <figure>
-      %= image '/gene2phenotype/images/panel_specific_gencc.png', alt => 'diease_confidence', width => '100%'
+      %= image '/gene2phenotype/legacy/images/panel_specific_gencc.png', alt => 'diease_confidence', width => '100%'
       <figcaption>Panel specific curation. The entry GJA1, Hallermann-Streiff Syndrome, biallelic_autosomal, altered gene product structure is curated in three panels: DD, Eye and Skin. Confidence category and  visibility updates and the option to delete the entry from the panel are panel specific and can only be performed by curtors with panel specific edit permissions. </figcaption>
     </figure>
   </div>
 
   <h4>Publications</h4>
-  %= image '/gene2phenotype/images/publication.png', alt => 'publication', width => '100%'
+  %= image '/gene2phenotype/legacy/images/publication.png', alt => 'publication', width => '100%'
   <ol>
     <li>We store the links to the publications (via PMID) that provide evidence for a specific gene-disease pair. A new publication is retrived by its PMID using Europe PMC's REST API.</li>
     <li>The title of the added publication is listed and links out to Europe PMC. A publication can be deleted and you can add comments for a publication.</li>
   </ol>
   <h4>Add phenotypes from HPO</h4>
-  %= image '/gene2phenotype/images/phenotype.png', alt => 'phenotype', width => '100%'
+  %= image '/gene2phenotype/legacy/images/phenotype.png', alt => 'phenotype', width => '100%'
   <ol>
     <li>Phenotype terms are added from the Human Phenotype Ontology. The term can be selected using autocomplete.</li>
     <li>Phenotype terms are added to the list of phenotypes associated with the G2P entry.</li>  
@@ -86,7 +86,7 @@ Once you started curating your panel you can download the annotations and use it
     <li>You can add a comment or disard and go back to the list of phenotypes.</li>
   </ol>
   <h4>Add organ specifity</h4>
-  %= image '/gene2phenotype/images/organ.png', alt => 'organ', width => '100%'
+  %= image '/gene2phenotype/legacy/images/organ.png', alt => 'organ', width => '100%'
   <ol>
     <li>Selected organ specificity for a gene-disease pair.</li>
     <li>Edit organ specificity list.</li>

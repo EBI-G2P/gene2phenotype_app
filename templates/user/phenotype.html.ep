@@ -3,7 +3,7 @@
   <div id='phenotype_wrapper'>
     <div id='phenotype_first'>
       <label>Fast phenotype entry. First, search for a phenotype in the Human Phenotype Ontology tree. Then, hit the Add button to add the phenotype to your G2P entry.</label>
-      %= form_for '/gene2phenotype/gfd/phenotype/add' => begin
+      %= form_for '/gene2phenotype/legacy/gfd/phenotype/add' => begin
         <button type="submit" class="btn btn-primary btn-sm" id="fast_add_phenotype_button" style="float: right">Add</button>
         %= hidden_field GFD_id => $gfd->{GFD_id}
         <div style="overflow: hidden; padding-right: .5em;">
@@ -37,7 +37,7 @@
           </div>
           <div class="align_right">
             <div class="align_inline">
-              %= form_for '/gene2phenotype/gfd/phenotype/delete' => begin
+              %= form_for '/gene2phenotype/legacy/gfd/phenotype/delete' => begin
                 %= hidden_field GFD_phenotype_id => $phenotype->{GFD_phenotype_id}
                 %= hidden_field GFD_id => $gfd->{GFD_id}
                 <input id="button" type="submit" value="Delete Phenotype" class="btn btn-primary btn-sm confirm"/>
@@ -52,7 +52,7 @@
           </div>
 
           <div class="add_comment_phenotype">
-            %= form_for '/gene2phenotype/gfd/phenotype/add_comment' => begin
+            %= form_for '/gene2phenotype/legacy/gfd/phenotype/add_comment' => begin
               <div class="comment_text_area"><textarea class="form-control" name="GFD_phenotype_comment" rows="3"></textarea></div>
               %= hidden_field GFD_phenotype_id => $phenotype->{GFD_phenotype_id}
               %= hidden_field GFD_id => $gfd->{GFD_id}
@@ -71,7 +71,7 @@
                   <div class="align_left"><p><%= $comment->{comment_text} %> (<%= $comment->{user} %> <%= $comment->{date} %>)</p></div>
                   <% if ($logged_in) { %>
                     <div class="align_right">
-                      %= form_for '/gene2phenotype/gfd/phenotype/delete_comment' => begin
+                      %= form_for '/gene2phenotype/legacy/gfd/phenotype/delete_comment' => begin
                         %= hidden_field GFD_phenotype_comment_id => $comment->{GFD_phenotype_comment_id}
                         %= hidden_field GFD_id => $gfd->{GFD_id}
                         <input id="button" type="submit" value="Delete Comment" class="btn btn-primary btn-sm confirm"/>
