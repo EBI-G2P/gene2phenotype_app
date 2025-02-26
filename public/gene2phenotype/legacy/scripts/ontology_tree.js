@@ -69,7 +69,7 @@ $( document ).ready(function() {
       url: "/gene2phenotype/ajax/phenotype/add",
       data: "phenotype_id=" + new_id + "&GFD_id=" + GFD_id,
       success: function(data) {
-       $( "#phenotype_second" ).load("/gene2phenotype/gfd?GFD_id=" + GFD_id + " #phenotype_second"); 
+       $( "#phenotype_second" ).load("/gene2phenotype/legacy/gfd?GFD_id=" + GFD_id + " #phenotype_second"); 
       }
     }); 
   });
@@ -82,7 +82,7 @@ $( document ).ready(function() {
       url: "/gene2phenotype/ajax/phenotype/delete_from_tree",
       data: "phenotype_id=" + new_id + "&GFD_id=" + GFD_id,
       success: function(data) {
-       $( "#phenotype_second" ).load("/gene2phenotype/gfd?GFD_id=" + GFD_id + " #phenotype_second"); 
+       $( "#phenotype_second" ).load("/gene2phenotype/legacy/gfd?GFD_id=" + GFD_id + " #phenotype_second"); 
       }
     }); 
   });
