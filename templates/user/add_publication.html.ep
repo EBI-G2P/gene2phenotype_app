@@ -6,7 +6,7 @@
     <h4>Add new publication</h4>
     <div class="add_publication_feedback" role="alert">
     </div>
-    %= form_for '/gene2phenotype/gfd/publication/add' => begin
+    %= form_for '/gene2phenotype/legacy/gfd/publication/add' => begin
       <div class="form-group">
         <label>PMID</label>
         <div id="find_article">

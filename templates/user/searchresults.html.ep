@@ -8,7 +8,7 @@
     <h3>Search results for <%= $search_term %></h3>
   <% } elsif  ( scalar @{$search_results->{gfd_results}} == 0) { %>
     <h3>No result for <%= $search_term %>. Information about this <%= $search_term %> not yet in G2P</h3>
-    %= form_for '/gene2phenotype/gfd/show_add_new_entry_form' => begin
+    %= form_for '/gene2phenotype/legacy/gfd/show_add_new_entry_form' => begin
       <input id="button" type="submit" class="btn btn-primary" value="Add New Gene Disease Entry"/>
     %end
   <% } else { %>
@@ -39,7 +39,7 @@
             <% } %>
             <td><%= $gfd->{panels} %></td>
             <td>
-              %= form_for '/gene2phenotype/gfd' => (id => $gfd->{dbID}) => begin
+              %= form_for '/gene2phenotype/legacy/gfd' => (id => $gfd->{dbID}) => begin
                 %= hidden_field dbID => $gfd->{dbID}
                 <input id="button" type="submit" value="Go to page" class="btn btn-primary btn-sm"/>
               % end
@@ -48,7 +48,7 @@
         <% } %>
       </tbody>
     </table>
-      %= form_for '/gene2phenotype/gfd/show_add_new_entry_form' => begin
+      %= form_for '/gene2phenotype/legacy/gfd/show_add_new_entry_form' => begin
         <% if (scalar keys %$gene_symbols == 1 ) { %>
           %= hidden_field gene_symbol => (keys %$gene_symbols)[0]
         <% } %>

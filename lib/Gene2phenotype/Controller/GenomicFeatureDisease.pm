@@ -43,7 +43,7 @@ sub show {
     $gfd = $model->fetch_by_dbID($dbID, $logged_in, $authorised_panels);
   }
   if (!defined $gfd) {
-    return $self->redirect_to("/gene2phenotype/");
+    return $self->redirect_to("/gene2phenotype/legacy/");
   }
   $self->stash(gfd => $gfd);
   my $disease_id = $gfd->{disease_id};
@@ -54,7 +54,7 @@ sub show {
   my $gene_attribs = $genomic_feature_model->fetch_by_dbID($gene_id);
   $self->stash(gene => $gene_attribs);
 
-  $self->session(last_url => "/gene2phenotype/gfd?GFD_id=$dbID");
+  $self->session(last_url => "/gene2phenotype/legacy/gfd?GFD_id=$dbID");
 
   if ($self->session('logged_in')) {
     $self->render(template => 'user/gfd');
@@ -71,7 +71,7 @@ sub show {
   Returntype : If the user is logged in then redirect to template add_new_entry.html.ep
   Exceptions : None
   Caller     : Template: user/searchresults.html.ep
-               Request: GET /gene2phenotype/gfd/show_add_new_entry_form
+               Request: GET /gene2phenotype/legacy/gfd/show_add_new_entry_form
   Status     : Stable
 =cut
 
@@ -115,7 +115,7 @@ sub show_add_new_entry_form {
     $self->render(template => 'add_new_entry');
   } else {
     $self->flash(message => 'You have been signed out', alert_class => 'alert-danger');
-    return $self->redirect_to("/gene2phenotype/");
+    return $self->redirect_to("/gene2phenotype/legacy/");
   }
 
 }
@@ -127,7 +127,7 @@ sub show_add_new_entry_form {
   Returntype : If the user is logged in and allowed to edit the panel  edit_entry.html.ep
   Exceptions : None
   Caller     : Template: user/gfd.html.ep
-               Request: GET /gene2phenotype/gfd/edit_entry
+               Request: GET /gene2phenotype/legacy/gfd/edit_entry
                Template : show_attribs.html.ep
   Status     : Stable
 =cut
@@ -161,7 +161,7 @@ sub edit_allelic_mutation_form {
   Returntype : If the user is logged in and allowed to edit the panel  allelic.html.ep
   Exceptions : None
   Caller     : Template: show_attribs.html.ep
-               Request: GET /gene2phenotype/gfd/update_allelic
+               Request: GET /gene2phenotype/legacy/gfd/update_allelic
                Template : allelic.html.ep
   Status     : Stable
 =cut
@@ -192,7 +192,7 @@ sub update_allelic_requirement_temp {
   Description: Updating the allelic requirement  of a GenomicFeatureDisease
   Exceptions : None
   Caller     : Template: allelic.html.ep
-               Request : GET /gene2phenotype/gfd/allelic_requirement/update
+               Request : GET /gene2phenotype/legacy/gfd/allelic_requirement/update
                Params  : 
                    allelic_requirement - The allelic requirement to be updated to 
                    GFD_id - The database id of the GenomicFeatureDisease.
@@ -218,7 +218,7 @@ sub update_allelic_requirement {
   my $email = $self->session('email');
   if ($allelic_requirement eq $gfd->{allelic_requirement}) {
     $self->feedback_message('SELECTED_ALLELIC_REQUIREMENT');
-    return $self->redirect_to("/gene2phenotype/gfd/show_attribs?GFD_id=$GFD_id");
+    return $self->redirect_to("/gene2phenotype/legacy/gfd/show_attribs?GFD_id=$GFD_id");
   }
   my $gfds = $gfd_model->fetch_all_by_GenomicFeature_constraints($gf, {
     'mutation_consequence' => $gfd->{mutation_consequence},
@@ -226,13 +226,13 @@ sub update_allelic_requirement {
   });
   if (scalar @$gfds == 0) {
     $gfd_model->update_allelic_requirement($email, $GFD_id, $allelic_requirement);
-    $self->session(last_url => "/gene2phenotype/gfd/edit_entry?GFD_id=$GFD_id");
+    $self->session(last_url => "/gene2phenotype/legacy/gfd/edit_entry?GFD_id=$GFD_id");
     $self->feedback_message("UPDATED_ALLELIC_REQUIREMENT_SUC");
-    return $self->redirect_to("/gene2phenotype/gfd/show_attribs?GFD_id=$GFD_id");
+    return $self->redirect_to("/gene2phenotype/legacy/gfd/show_attribs?GFD_id=$GFD_id");
   }
   else {
     $self->feedback_message("GFD_ALREADY_EXISTS");
-    return $self->redirect_to("/gene2phenotype/gfd/show_attribs?GFD_id=$GFD_id");
+    return $self->redirect_to("/gene2phenotype/legacy/gfd/show_attribs?GFD_id=$GFD_id");
   }
 }
 
@@ -243,7 +243,7 @@ sub update_allelic_requirement {
   Returntype : If the user is logged in and allowed to edit the panel  ccm.html.ep
   Exceptions : None
   Caller     : Template: show_attribs.html.ep
-               Request: GET /gene2phenotype/gfd/update_ccm
+               Request: GET /gene2phenotype/legacy/gfd/update_ccm
                Template : ccm.html.ep
   Status     : Stable
 =cut
@@ -276,7 +276,7 @@ sub update_cross_cutting_modifier_temp {
   Description: Updating the cross cutting modifier  of a GenomicFeatureDisease
   Exceptions : None
   Caller     : Template: ccm.html.ep
-               Request : GET /gene2phenotype/gfd/cross_cutting_modifier/update
+               Request : GET /gene2phenotype/legacy/gfd/cross_cutting_modifier/update
                Params  : 
                    cross cutting modifier - The cross cutting modifier to be updated to 
                    GFD_id - The database id of the GenomicFeatureDisease.
@@ -299,12 +299,12 @@ sub update_cross_cutting_modifier {
   }
   if ($cross_cutting_modifier eq $gfd->{cross_cutting_modifier}) {
      $self->feedback_message('SELECTED_CROSS_CUTTING_MODIFIER');
-     return $self->redirect_to("/gene2phenotype/gfd/show_attribs?GFD_id=$GFD_id");
+     return $self->redirect_to("/gene2phenotype/legacy/gfd/show_attribs?GFD_id=$GFD_id");
   }
   $model->update_cross_cutting_modifier($email, $GFD_id, $cross_cutting_modifier);
-  $self->session(last_url => "/gene2phenotype/gfd/show_attribs?GFD_id=$GFD_id");
+  $self->session(last_url => "/gene2phenotype/legacy/gfd/show_attribs?GFD_id=$GFD_id");
   $self->feedback_message("UPDATED_CROSS_CUT_SUC");
-  return $self->redirect_to("/gene2phenotype/gfd?GFD_id=$GFD_id");
+  return $self->redirect_to("/gene2phenotype/legacy/gfd?GFD_id=$GFD_id");
 }
 
 =head2 update_mutation_consequence_temp
@@ -314,7 +314,7 @@ sub update_cross_cutting_modifier {
   Returntype : If the user is logged in and allowed to edit the panel  mutation.html.ep
   Exceptions : None
   Caller     : Template: show_attribs.html.ep
-               Request: GET /gene2phenotype/gfd/update_mutation_con
+               Request: GET /gene2phenotype/legacy/gfd/update_mutation_con
                Template : mutation.html.ep
   Status     : Stable
 =cut
@@ -346,7 +346,7 @@ sub update_mutation_consequence_temp {
   Description: Updating the mutation consequence  of a GenomicFeatureDisease
   Exceptions : None
   Caller     : Template: mutation.html.ep
-               Request : GET /gene2phenotype/gfd/mutation_consequence/update
+               Request : GET /gene2phenotype/legacy/gfd/mutation_consequence/update
                Params  : 
                    mutation_consequence - The mutation consequence to be updated to 
                    GFD_id - The database id of the GenomicFeatureDisease.
@@ -374,7 +374,7 @@ sub update_mutation_consequence {
   my $email = $self->session('email');
   if ($mutation_consequence eq $gfd->{mutation_consequence}) {
     $self->feedback_message('SELECTED_MUTATION_CONSEQ');
-    return $self->redirect_to("/gene2phenotype/gfd/show_attribs?GFD_id=$GFD_id");
+    return $self->redirect_to("/gene2phenotype/legacy/gfd/show_attribs?GFD_id=$GFD_id");
   }
 
   my $gfds = $gfd_model->fetch_all_by_GenomicFeature_constraints($gf, {
@@ -385,13 +385,13 @@ sub update_mutation_consequence {
 
   if (scalar @$gfds == 0) {
     $gfd_model->update_mutation_consequence($email, $GFD_id, $mutation_consequence);
-    $self->session(last_url => "/gene2phenotype/gfd/show_attribs?GFD_id=$GFD_id");
+    $self->session(last_url => "/gene2phenotype/legacy/gfd/show_attribs?GFD_id=$GFD_id");
     $self->feedback_message("UPDATED_MUTATION_CONSEQ_SUC");
-    return $self->redirect_to("/gene2phenotype/gfd?GFD_id=$GFD_id");
+    return $self->redirect_to("/gene2phenotype/legacy/gfd?GFD_id=$GFD_id");
   } 
   else {
     $self->feedback_message("GFD_ALREADY_EXISTS");
-    return $self->redirect_to("/gene2phenotype/gfd/show_attribs?GFD_id=$GFD_id");
+    return $self->redirect_to("/gene2phenotype/legacy/gfd/show_attribs?GFD_id=$GFD_id");
   }
 
 }
@@ -403,7 +403,7 @@ sub update_mutation_consequence {
   Returntype : If the user is logged in and allowed to edit the panel  ccm.html.ep
   Exceptions : None
   Caller     : Template: show_attribs.html.ep
-               Request: GET /gene2phenotype/gfd/update_mcf
+               Request: GET /gene2phenotype/legacy/gfd/update_mcf
                Template : mcf.html.ep
   Status     : Stable
 =cut
@@ -437,7 +437,7 @@ sub update_mutation_consequence_flag_temp {
   Description: Updating the mutation consequence flag of a GenomicFeatureDisease
   Exceptions : None
   Caller     : Template: show_attribs.html.ep
-               Request : GET /gene2phenotype/gfd/mutation_consequence_flag/update
+               Request : GET /gene2phenotype/legacy/gfd/mutation_consequence_flag/update
                Params  : 
                    mutation_consequence_flag - The mutation consequence flag to be updated to 
                    GFD_id - The database id of the GenomicFeatureDisease.
@@ -459,12 +459,12 @@ sub update_mutation_consequence_flag {
   }
   if ($mutation_consequence_flag eq $gfd->{mutation_consequence_flag})  {
      $self->feedback_message('SELECTED_MUTATION_CON_FLAG');
-     return $self->redirect_to("/gene2phenotype/gfd/show_attribs?GFD_id=$GFD_id");
+     return $self->redirect_to("/gene2phenotype/legacy/gfd/show_attribs?GFD_id=$GFD_id");
   }
   $model->update_mutation_consequence_flag($email, $GFD_id, $mutation_consequence_flag);
-  $self->session(last_url => "/gene2phenotype/gfd/show_attribs?GFD_id=$GFD_id");
+  $self->session(last_url => "/gene2phenotype/legacy/gfd/show_attribs?GFD_id=$GFD_id");
   $self->feedback_message("UPDATED_MUT_CON_FLAG_SUC");
-  return $self->redirect_to("/gene2phenotype/gfd/show_attribs?GFD_id=$GFD_id");
+  return $self->redirect_to("/gene2phenotype/legacy/gfd/show_attribs?GFD_id=$GFD_id");
 }
 
 =head2 update_variant_consequence_temp
@@ -474,7 +474,7 @@ sub update_mutation_consequence_flag {
   Returntype : If the user is logged in and allowed to edit the panel  ccm.html.ep
   Exceptions : None
   Caller     : Template: show_attribs.html.ep
-               Request: GET /gene2phenotype/gfd/update_vc
+               Request: GET /gene2phenotype/legacy/gfd/update_vc
                Template : var_con.html.ep
   Status     : Stable
 =cut
@@ -505,7 +505,7 @@ sub update_variant_consequence_temp {
   Description: Updating the variant consequence of a GenomicFeatureDisease
   Exceptions : None
   Caller     : Template: show_attribs.html.ep
-               Request : GET /gene2phenotype/gfd/variant_consequence/update
+               Request : GET /gene2phenotype/legacy/gfd/variant_consequence/update
                Params  : 
                    mutation_consequence_flag - The mutation consequence flag to be updated to 
                    GFD_id - The database id of the GenomicFeatureDisease.
@@ -528,12 +528,12 @@ sub update_variant_consequence {
   }
   if ($variant_consequence eq $gfd->{variant_consequence})  {
      $self->feedback_message('SELECTED_VARIANT_CONSEQUENCE');
-     return $self->redirect_to("/gene2phenotype/gfd/show_attribs?GFD_id=$GFD_id");
+     return $self->redirect_to("/gene2phenotype/legacy/gfd/show_attribs?GFD_id=$GFD_id");
   }
   $model->update_variant_consequence($email, $GFD_id, $variant_consequence);
-  $self->session(last_url => "/gene2phenotype/gfd/show_attribs?GFD_id=$GFD_id");
+  $self->session(last_url => "/gene2phenotype/legacy/gfd/show_attribs?GFD_id=$GFD_id");
   $self->feedback_message("UPDATED_VAR_CON_SUCCESSFULLY");
-  return $self->redirect_to("/gene2phenotype/gfd/show_attribs?GFD_id=$GFD_id");
+  return $self->redirect_to("/gene2phenotype/legacy/gfd/show_attribs?GFD_id=$GFD_id");
 }
 
 sub update_organ_list {
@@ -543,9 +543,9 @@ sub update_organ_list {
   my $model = $self->model('genomic_feature_disease');  
   my $email = $self->session('email');
   $model->update_organ_list($email, $GFD_id, $organ_id_list);
-  $self->session(last_url => "/gene2phenotype/gfd?GFD_id=$GFD_id");
+  $self->session(last_url => "/gene2phenotype/legacy/gfd?GFD_id=$GFD_id");
   $self->feedback_message('UPDATED_ORGAN_LIST');
-  return $self->redirect_to("/gene2phenotype/gfd?GFD_id=$GFD_id");
+  return $self->redirect_to("/gene2phenotype/legacy/gfd?GFD_id=$GFD_id");
 }
 
 sub update_disease {
@@ -557,9 +557,9 @@ sub update_disease {
   my $model = $self->model('genomic_feature_disease');  
   my $email = $self->session('email');
   $model->update_disease($email, $GFD_id, $disease_id, $name, $mim);
-  $self->session(last_url => "/gene2phenotype/gfd?GFD_id=$GFD_id");
+  $self->session(last_url => "/gene2phenotype/legacy/gfd?GFD_id=$GFD_id");
   $self->feedback_message('UPDATED_DISEASE_ATTRIBS_SUC');
-  return $self->redirect_to("/gene2phenotype/gfd?GFD_id=$GFD_id");
+  return $self->redirect_to("/gene2phenotype/legacy/gfd?GFD_id=$GFD_id");
 }
 
 

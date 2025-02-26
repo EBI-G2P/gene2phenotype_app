@@ -6,7 +6,7 @@
           <li>Copyright © EMBL-EBI 2024</li>
           <li>&middot;</li>
           <li>
-            %= link_to Contact  => '/gene2phenotype/help'
+            %= link_to Contact  => '/gene2phenotype/legacy/help'
           </li>
           <li>&middot;</li>
           <li>
@@ -14,11 +14,11 @@
           </li>
           <li>&middot;</li>
           <li>
-            %= link_to Disclaimer  => '/gene2phenotype/disclaimer'
+            %= link_to Disclaimer  => '/gene2phenotype/legacy/disclaimer'
           </li>
           <li>&middot;</li>
           <li>
-            %= link_to Documentation => '/gene2phenotype/documentation'
+            %= link_to Documentation => '/gene2phenotype/legacy/documentation'
           </li>
           <li>&middot;</li>
           <li>
@@ -35,22 +35,22 @@
         <ul class="bs-docs-footer-links text-muted">
           <li>
             <%= link_to 'https://www.ebi.ac.uk/' => begin %>
-              %= image '/gene2phenotype/images/EBI.png', alt => 'EBI', width => '20%', height => 'auto' 
+              %= image '/gene2phenotype/legacy/images/EBI.png', alt => 'EBI', width => '20%', height => 'auto' 
             <% end %>
           </li>
           <li>
             <%= link_to 'https://paradigmgenomics.org/' => begin %>
-              %= image '/gene2phenotype/images/PARADIGM.png', alt => 'PARADIGM', width => '40%', height => 'auto' 
+              %= image '/gene2phenotype/legacy/images/PARADIGM.png', alt => 'PARADIGM', width => '40%', height => 'auto' 
             <% end %>
           </li>
           <li>
             <%= link_to 'https://www.sanger.ac.uk/' => begin %>
-              %= image '/gene2phenotype/images/wellcome_sanger.png', alt => 'sanger', width => '10%', height => 'auto' 
+              %= image '/gene2phenotype/legacy/images/wellcome_sanger.png', alt => 'sanger', width => '10%', height => 'auto' 
             <% end %>
           </li>
           <li>
             <div>
-              %= image '/gene2phenotype/images/WELLCOME-logo.png', alt => 'WELLCOME-logo', width => '10%', height => 'auto' 
+              %= image '/gene2phenotype/legacy/images/WELLCOME-logo.png', alt => 'WELLCOME-logo', width => '10%', height => 'auto' 
               <p>Funded by Wellcome</p>
             </div>
           </li>

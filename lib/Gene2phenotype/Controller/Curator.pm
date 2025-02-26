@@ -42,7 +42,7 @@ sub no_publication {
     $self->stash( gfds_no_publication => \@results);
     $self->render(template => 'curation_no_publication');
   } else {
-    return $self->redirect_to("/gene2phenotype/");
+    return $self->redirect_to("/gene2phenotype/legacy/");
   }
 }
 
@@ -72,7 +72,7 @@ sub show_all_duplicated_LGM_by_panel {
     $self->stash(gfs_merge_LGM => \@results);
     $self->render(template => 'curation_all_duplicated_LGM_by_panel');
   } else {
-    return $self->redirect_to("/gene2phenotype/");
+    return $self->redirect_to("/gene2phenotype/legacy/");
   }
 
 }
@@ -93,7 +93,7 @@ sub show_all_duplicated_LGM_by_gene {
     $self->stash(duplicated_gfds => $duplicated_gfds);
     $self->render(template => 'curation_all_duplicated_LGM_by_gene');
   } else {
-    return $self->redirect_to("/gene2phenotype/");
+    return $self->redirect_to("/gene2phenotype/legacy/");
   }
 }
 
@@ -121,7 +121,7 @@ sub restricted {
     $self->stash( gfds_restricted => \@results);
     $self->render(template => 'curation_restricted');
   } else {
-    return $self->redirect_to("/gene2phenotype/");
+    return $self->redirect_to("/gene2phenotype/legacy/");
   }
 }
 

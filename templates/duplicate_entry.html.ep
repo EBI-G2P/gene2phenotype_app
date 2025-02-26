@@ -7,7 +7,7 @@
   <div class="show_db_content">
   <h3 class="section_header"><a class="anchor" name="duplicate_entry">Duplicate entry</a><a title="Back to Top" href='#top'><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></a></h3>
 
-  %= form_for '/gene2phenotype/gfd/duplicate/' => begin
+  %= form_for '/gene2phenotype/legacy/gfd/duplicate/' => begin
     <div>
       <label>Duplicate into panel:</lable>
       %= select_field panel => $duplicate_to

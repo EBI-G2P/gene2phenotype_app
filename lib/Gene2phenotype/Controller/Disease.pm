@@ -50,7 +50,7 @@ sub update {
   } else {
     $self->feedback_message('DATA_NOT_CHANGED');
   }
-  $self->redirect_to("/gene2phenotype/disease?dbID=$disease_id");
+  $self->redirect_to("/gene2phenotype/legacy/disease?dbID=$disease_id");
 }
 
 1;

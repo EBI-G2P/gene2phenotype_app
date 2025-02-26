@@ -11,7 +11,7 @@
     % my $found = 0;
      <% foreach my $gfd_panel (@{$gfd->{gfd_panels}}) { %>
       % if ($gfd_panel->{user_can_edit} && $found == 0) {
-        %= form_for '/gene2phenotype/gfd/edit_entry' => begin 
+        %= form_for '/gene2phenotype/legacy/gfd/edit_entry' => begin 
           %= hidden_field GFD_id => $gfd->{GFD_id}
           <input id="button" type="submit" value="EDIT" class="btn btn-primary btn-sm" style="float: right;">
           % $found = 1;

@@ -2,7 +2,7 @@
 <div class="container">
   <div id="login" class="container">
     <h2>Recover password</h2>
-    %= form_for '/gene2phenotype/login/recovery/mail' => (method => 'POST') => (class => 'submit_form') => begin
+    %= form_for '/gene2phenotype/legacy/login/recovery/mail' => (method => 'POST') => (class => 'submit_form') => begin
       <div class="form-group">
         <label for="email">Email address</label>
         <fieldset>

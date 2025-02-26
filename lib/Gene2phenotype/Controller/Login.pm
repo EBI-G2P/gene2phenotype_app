@@ -30,7 +30,7 @@ use base qw(Gene2phenotype::Controller::BaseController);
   Exceptions : If the authentication fails, we show an error message and redirect the user
                back to the login page.
   Caller     : Template: login/login.html.ep
-               Request: POST /gene2phenotype/login
+               Request: POST /gene2phenotype/legacy/login
                Params:
                    email - The user's email address entered into the login form
                    password - The user's password entered into the login form
@@ -50,11 +50,11 @@ sub on_user_login {
     my $user = $model->fetch_by_email($email);
     my @panels = split(',', $user->panel);
     $self->session(panels => \@panels);
-    my $last_page = $self->session('last_url') || '/gene2phenotype';
+    my $last_page = $self->session('last_url') || '/gene2phenotype/legacy';
     return $self->redirect_to($last_page);
   }
   $self->feedback_message('LOGIN_FAILED');
-  return $self->redirect_to('/gene2phenotype/login');
+  return $self->redirect_to('/gene2phenotype/legacy/login');
 }
 
 
@@ -66,7 +66,7 @@ sub on_user_login {
                or if that page wasn't stored redirect to the homepage.
   Exceptions : None
   Caller     : Template: header.html.ep
-               Request: GET /gene2phenotype/logout
+               Request: GET /gene2phenotype/legacy/logout
   Status     : Stable
 =cut
 
@@ -75,7 +75,7 @@ sub on_user_logout {
   $self->session(logged_in => 0);
   $self->session(panels => []);
   $self->session(expires => 1);
-  my $last_page = $self->session('last_url') || '/gene2phenotype';
+  my $last_page = $self->session('last_url') || '/gene2phenotype/legacy';
   return $self->redirect_to($last_page);
 }
 
@@ -96,7 +96,7 @@ sub is_logged_in {
                homepage.
   Exceptions : None
   Caller     : Template: login/recovery.html.ep
-               Request: POST /gene2phenotype/login/recovery/mail
+               Request: POST /gene2phenotype/legacy/login/recovery/mail
                Params: email - The user's email address
   Status     : Stable
 =cut
@@ -110,7 +110,7 @@ sub send_recover_pwd_mail {
   
 
   my $autologin_code = md5_hex( time + rand(time) );
-  my $url = $self->url_for('/gene2phenotype/login/recovery/reset')->query(code => $autologin_code)->to_abs;
+  my $url = $self->url_for('/gene2phenotype/legacy/login/recovery/reset')->query(code => $autologin_code)->to_abs;
   my $message = "Hi $user->{username}, This is the url to change your password, Kindly follow the link, $url";
   my $mes_join = join(",\n", (split ',', $message) ), "\n"; 
   
@@ -141,7 +141,7 @@ sub send_recover_pwd_mail {
   Returntype : Redirects to template login/reset_password for resetting
                the password.
   Exceptions : None
-  Caller     : Request: POST /gene2phenotype/login/recovery/reset
+  Caller     : Request: POST /gene2phenotype/legacy/login/recovery/reset
                         The request comes from the URL that has been
                         sent to the user.
                Params: code that was generated in send_recover_pwd_mail
@@ -164,7 +164,7 @@ sub validate_pwd_recovery {
                to login first and redirect to the homepage.
   Exceptions : None
   Caller     : Template header.html.ep
-               Request: GET /gene2phenotype/account
+               Request: GET /gene2phenotype/legacy/account
   Status     : Stable
 =cut
 

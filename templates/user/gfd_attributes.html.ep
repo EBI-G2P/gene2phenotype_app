@@ -16,7 +16,7 @@
             <td><%= $gfd_panel->{panel} %></td>
             <% if ($gfd_panel->{user_can_edit}) { %>
               <td>
-                %= form_for '/gene2phenotype/gfd_panel/confidence_category/update' => begin
+                %= form_for '/gene2phenotype/legacy/gfd_panel/confidence_category/update' => begin
                   %= select_field category_attrib_id => $gfd_panel->{confidence_category_list}
                   % if ($gfd_panel->{clinical_review}) {
                     <p><span class="label label-info">Requires clinical review</span></p> 
@@ -29,7 +29,7 @@
                 % end
               </td>
               <td>
-                %= form_for '/gene2phenotype/gfd_panel/authorised/update' => begin
+                %= form_for '/gene2phenotype/legacy/gfd_panel/authorised/update' => begin
                   <select name="visibility">
                     <% if ($gfd_panel->{is_visible}) { %>
                       <option value="authorised" selected>Authorised. Visible to all users.</option>
@@ -47,7 +47,7 @@
                 %end
               </td>
               <td>
-                %= form_for '/gene2phenotype/gfd_panel/delete' => begin
+                %= form_for '/gene2phenotype/legacy/gfd_panel/delete' => begin
                   %= hidden_field GFD_id => $gfd_panel->{GFD_id}
                   %= hidden_field GFD_panel_id => $gfd_panel->{GFD_panel_id}
                   <input id="button" type="submit" value="Delete" class="btn btn-primary btn-sm confirm"/>

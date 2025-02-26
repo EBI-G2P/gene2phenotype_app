@@ -110,26 +110,26 @@ sub startup {
 
   });
 
-  $r->get('/gene2phenotype')->to('home#show');
-  $r->get('/gene2phenotype/disclaimer')->to(template => 'disclaimer');
-  $r->get('/gene2phenotype/documentation')->to(template => 'documentation');
-  $r->get('/gene2phenotype/help')->to(template => 'help');
-  $r->get('/gene2phenotype/updates_to_our_terms')->to(template => 'updates_to_our_terms');
+  $r->get('/gene2phenotype/legacy')->to('home#show');
+  $r->get('/gene2phenotype/legacy/disclaimer')->to(template => 'disclaimer');
+  $r->get('/gene2phenotype/legacy/documentation')->to(template => 'documentation');
+  $r->get('/gene2phenotype/legacy/help')->to(template => 'help');
+  $r->get('/gene2phenotype/legacy/updates_to_our_terms')->to(template => 'updates_to_our_terms');
 
 
-  $r->get('/gene2phenotype/documentation/enter_new_gene_disease_pair' => sub {
+  $r->get('/gene2phenotype/legacy/documentation/enter_new_gene_disease_pair' => sub {
     my $c = shift;
     if ($c->session('logged_in')) {
       $c->render(template => 'enter_new_gene_disease_pair');
     } else {
-      $c->redirect_to('/gene2phenotype');
+      $c->redirect_to('/gene2phenotype/legacy');
     }
   });
 
-  $r->get('/gene2phenotype/account')->to('login#account_info');
+  $r->get('/gene2phenotype/legacy/account')->to('login#account_info');
 
   # Called by login/account_info.html.ep
-  $r->post('/gene2phenotype/account/update' => sub {
+  $r->post('/gene2phenotype/legacy/account/update' => sub {
     my $c = shift;
     my $auth = new Apache::Htpasswd({ passwdFile => $password_file, ReadOnly => 0, UseMD5 => 1,});
 
@@ -140,29 +140,29 @@ sub startup {
 
     if (!$self->authenticate($email, $current_pwd)) { 
       $c->flash({message => 'Your current password is incorrect', alert_class => 'alert-danger'});
-      return $c->redirect_to('/gene2phenotype/account');
+      return $c->redirect_to('/gene2phenotype/legacy/account');
     }
 
     if ($new_pwd ne $retyped_pwd) {
       $c->flash({message => 'Passwords don\'t match. Please ensure retyped password matches your new password.', alert_class => 'alert-danger'});
-      return $c->redirect_to('/gene2phenotype/account');
+      return $c->redirect_to('/gene2phenotype/legacy/account');
     }
     my $success = $auth->htpasswd($email, $new_pwd, {'overwrite' => 1});        
     if ($success) {
       $c->flash({message => 'Successfully updated password', alert_class => 'alert-success'});
-      return $c->redirect_to('/gene2phenotype/account');
+      return $c->redirect_to('/gene2phenotype/legacy/account');
     } else {
       $c->flash(message => 'Error occurred while resetting your password. Please contact g2p-help@ebi.ac.uk', alert_class => 'alert-danger');
-      return $c->redirect_to('/gene2phenotype/account');
+      return $c->redirect_to('/gene2phenotype/legacy/account');
     }
   });
-  $r->get('/gene2phenotype/login')->to(template => 'login/login');
-  $r->get('/gene2phenotype/login/recovery')->to(template => 'login/recovery');
-  $r->post('/gene2phenotype/login/recovery/mail')->to('login#send_recover_pwd_mail');
-  $r->get('/gene2phenotype/login/recovery/reset')->to('login#validate_pwd_recovery');
+  $r->get('/gene2phenotype/legacy/login')->to(template => 'login/login');
+  $r->get('/gene2phenotype/legacy/login/recovery')->to(template => 'login/recovery');
+  $r->post('/gene2phenotype/legacy/login/recovery/mail')->to('login#send_recover_pwd_mail');
+  $r->get('/gene2phenotype/legacy/login/recovery/reset')->to('login#validate_pwd_recovery');
 
   # Called by login/reset_password.html.ep
-  $r->post('/gene2phenotype/login/recovery/update' => sub {
+  $r->post('/gene2phenotype/legacy/login/recovery/update' => sub {
     my $c = shift;
     my $auth = new Apache::Htpasswd({ passwdFile => $password_file, ReadOnly => 0, UseMD5 => 1,});
     my $email = $c->param('email');
@@ -178,60 +178,60 @@ sub startup {
           $c->session(logged_in => 1);
           $c->stash(logged_in => 1);
           $c->flash({message => 'Successfully updated password', alert_class => 'alert-success'});
-          return $c->redirect_to('/gene2phenotype');
+          return $c->redirect_to('/gene2phenotype/legacy');
         } else {
           $c->flash(message => 'Error occurred while resetting your password. Please contact g2p-help@ebi.ac.uk', alert_class => 'alert-danger');
-          return $c->redirect_to('/gene2phenotype');
+          return $c->redirect_to('/gene2phenotype/legacy');
         }
       }
     }
     $c->flash(message => 'Error occurred while resetting your password. Please contact g2p-help@ebi.ac.uk', alert_class => 'alert-danger');
-    return $c->redirect_to('/gene2phenotype');
+    return $c->redirect_to('/gene2phenotype/legacy');
   });
 
-  $r->get('/gene2phenotype/reset')->to(template => 'login', change_pwd => 1);
-  $r->get('/gene2phenotype/logout')->to('login#on_user_logout');
+  $r->get('/gene2phenotype/legacy/reset')->to(template => 'login', change_pwd => 1);
+  $r->get('/gene2phenotype/legacy/logout')->to('login#on_user_logout');
   
-  $r->post('/gene2phenotype/login')->to('login#on_user_login');
-  $r->post('/gene2phenotype/reset')->to('login#reset_pwd');
+  $r->post('/gene2phenotype/legacy/login')->to('login#on_user_login');
+  $r->post('/gene2phenotype/legacy/reset')->to('login#reset_pwd');
 
-  $r->get('/gene2phenotype/gfd')->to('genomic_feature_disease#show');
+  $r->get('/gene2phenotype/legacy/gfd')->to('genomic_feature_disease#show');
 
 # :action=add, delete, update, add_comment, delete_comment
-  $r->get('/gene2phenotype/gfd/organ/update')->to('genomic_feature_disease#update_organ_list');
-  $r->get('/gene2phenotype/gfd/disease/update')->to('genomic_feature_disease#update_disease');
-  $r->get('/gene2phenotype/gfd/phenotype/:action')->to(controller => 'genomic_feature_disease_phenotype');
-  $r->get('/gene2phenotype/gfd/publication/:action')->to(controller => 'genomic_feature_disease_publication');
-  $r->get('/gene2phenotype/gfd/comment/:action')->to(controller => 'genomic_feature_disease_comment');
-  $r->get('/gene2phenotype/gfd/show_add_new_entry_form')->to('genomic_feature_disease#show_add_new_entry_form');
-  $r->get('/gene2phenotype/gfd/add')->to('genomic_feature_disease#add');
-  $r->get('/gene2phenotype/gfd/delete')->to('genomic_feature_disease#delete');
-  $r->get('/gene2phenotype/gfd/show_attribs')->to('genomic_feature_disease#edit_allelic_mutation_form');
-  $r->get('/gene2phenotype/gfd/edit_entry')->to('genomic_feature_disease#edit_allelic_mutation_form');
-  $r->get('/gene2phenotype/gfd/update_allelic')->to('genomic_feature_disease#update_allelic_requirement_temp');
-  $r->get('/gene2phenotype/gfd/update_ccm')->to('genomic_feature_disease#update_cross_cutting_modifier_temp');
-  $r->get('/gene2phenotype/gfd/update_mutation_con')->to('genomic_feature_disease#update_mutation_consequence_temp');
-  $r->get('/gene2phenotype/gfd/update_mcf')->to('genomic_feature_disease#update_mutation_consequence_flag_temp'); 
-  $r->get('/gene2phenotype/gfd/allelic_requirement/update')->to('genomic_feature_disease#update_allelic_requirement');
-  $r->get('/gene2phenotype/gfd/mutation_consequence/update')->to('genomic_feature_disease#update_mutation_consequence');
-  $r->get('/gene2phenotype/gfd/mutation_consequence_flag/update')->to('genomic_feature_disease#update_mutation_consequence_flag');
-  $r->get('/gene2phenotype/gfd/cross_cutting_modifier/update')->to('genomic_feature_disease#update_cross_cutting_modifier');
-  $r->get('/gene2phenotype/gfd/update_vc')->to('genomic_feature_disease#update_variant_consequence_temp'); 
-  $r->get('/gene2phenotype/gfd/variant_consequence/update')->to('genomic_feature_disease#update_variant_consequence');
-  $r->get('/gene2phenotype/gfd_panel/add')->to('genomic_feature_disease_panel#add');
-  $r->get('/gene2phenotype/gfd_panel/delete')->to('genomic_feature_disease_panel#delete');
-  $r->get('/gene2phenotype/gfd_panel/authorised/update')->to('genomic_feature_disease_panel#update_visibility');
-  $r->get('/gene2phenotype/gfd_panel/confidence_category/update')->to('genomic_feature_disease_panel#update_confidence_category');
+  $r->get('/gene2phenotype/legacy/gfd/organ/update')->to('genomic_feature_disease#update_organ_list');
+  $r->get('/gene2phenotype/legacy/gfd/disease/update')->to('genomic_feature_disease#update_disease');
+  $r->get('/gene2phenotype/legacy/gfd/phenotype/:action')->to(controller => 'genomic_feature_disease_phenotype');
+  $r->get('/gene2phenotype/legacy/gfd/publication/:action')->to(controller => 'genomic_feature_disease_publication');
+  $r->get('/gene2phenotype/legacy/gfd/comment/:action')->to(controller => 'genomic_feature_disease_comment');
+  $r->get('/gene2phenotype/legacy/gfd/show_add_new_entry_form')->to('genomic_feature_disease#show_add_new_entry_form');
+  $r->get('/gene2phenotype/legacy/gfd/add')->to('genomic_feature_disease#add');
+  $r->get('/gene2phenotype/legacy/gfd/delete')->to('genomic_feature_disease#delete');
+  $r->get('/gene2phenotype/legacy/gfd/show_attribs')->to('genomic_feature_disease#edit_allelic_mutation_form');
+  $r->get('/gene2phenotype/legacy/gfd/edit_entry')->to('genomic_feature_disease#edit_allelic_mutation_form');
+  $r->get('/gene2phenotype/legacy/gfd/update_allelic')->to('genomic_feature_disease#update_allelic_requirement_temp');
+  $r->get('/gene2phenotype/legacy/gfd/update_ccm')->to('genomic_feature_disease#update_cross_cutting_modifier_temp');
+  $r->get('/gene2phenotype/legacy/gfd/update_mutation_con')->to('genomic_feature_disease#update_mutation_consequence_temp');
+  $r->get('/gene2phenotype/legacy/gfd/update_mcf')->to('genomic_feature_disease#update_mutation_consequence_flag_temp'); 
+  $r->get('/gene2phenotype/legacy/gfd/allelic_requirement/update')->to('genomic_feature_disease#update_allelic_requirement');
+  $r->get('/gene2phenotype/legacy/gfd/mutation_consequence/update')->to('genomic_feature_disease#update_mutation_consequence');
+  $r->get('/gene2phenotype/legacy/gfd/mutation_consequence_flag/update')->to('genomic_feature_disease#update_mutation_consequence_flag');
+  $r->get('/gene2phenotype/legacy/gfd/cross_cutting_modifier/update')->to('genomic_feature_disease#update_cross_cutting_modifier');
+  $r->get('/gene2phenotype/legacy/gfd/update_vc')->to('genomic_feature_disease#update_variant_consequence_temp'); 
+  $r->get('/gene2phenotype/legacy/gfd/variant_consequence/update')->to('genomic_feature_disease#update_variant_consequence');
+  $r->get('/gene2phenotype/legacy/gfd_panel/add')->to('genomic_feature_disease_panel#add');
+  $r->get('/gene2phenotype/legacy/gfd_panel/delete')->to('genomic_feature_disease_panel#delete');
+  $r->get('/gene2phenotype/legacy/gfd_panel/authorised/update')->to('genomic_feature_disease_panel#update_visibility');
+  $r->get('/gene2phenotype/legacy/gfd_panel/confidence_category/update')->to('genomic_feature_disease_panel#update_confidence_category');
 
-  $r->get('/gene2phenotype/gene')->to('genomic_feature#show');
-  $r->get('/gene2phenotype/disease')->to('disease#show');
-  $r->get('/gene2phenotype/disease/update/')->to('disease#update');
+  $r->get('/gene2phenotype/legacy/gene')->to('genomic_feature#show');
+  $r->get('/gene2phenotype/legacy/disease')->to('disease#show');
+  $r->get('/gene2phenotype/legacy/disease/update/')->to('disease#update');
 
-  $r->get('/gene2phenotype/search')->to('search#results');
+  $r->get('/gene2phenotype/legacy/search')->to('search#results');
 
-  $r->get('/gene2phenotype/ajax/publication')->to('publication#get_description');
+  $r->get('/gene2phenotype/legacy/ajax/publication')->to('publication#get_description');
 
-  $r->get('/gene2phenotype/ajax/autocomplete' => sub {
+  $r->get('/gene2phenotype/legacy/ajax/autocomplete' => sub {
     my $c = shift;
     my $term = $c->param('term');
     my $type = $c->param('query_type');
@@ -262,16 +262,16 @@ sub startup {
     $c->render(json => \@query_output);  
   });
 
-  $r->get('/gene2phenotype/ajax/phenotype/add')->to('genomic_feature_disease_phenotype#add');
-  $r->get('/gene2phenotype/ajax/phenotype/delete_from_tree')->to('genomic_feature_disease_phenotype#delete_from_tree');
+  $r->get('/gene2phenotype/legacy/ajax/phenotype/add')->to('genomic_feature_disease_phenotype#add');
+  $r->get('/gene2phenotype/legacy/ajax/phenotype/delete_from_tree')->to('genomic_feature_disease_phenotype#delete_from_tree');
 
-  $r->get('/gene2phenotype/downloads')->to(template => 'downloads');
-  $r->get('/gene2phenotype/about')->to(template => 'about');
-  $r->get('/gene2phenotype/g2p_vep_plugin')->to(template => 'g2p_vep_plugin');
-  $r->get('/gene2phenotype/create_panel')->to(template => 'create_panel');
-  $r->get('/gene2phenotype/terminology')->to(template => 'terminology');
+  $r->get('/gene2phenotype/legacy/downloads')->to(template => 'downloads');
+  $r->get('/gene2phenotype/legacy/about')->to(template => 'about');
+  $r->get('/gene2phenotype/legacy/g2p_vep_plugin')->to(template => 'g2p_vep_plugin');
+  $r->get('/gene2phenotype/legacy/create_panel')->to(template => 'create_panel');
+  $r->get('/gene2phenotype/legacy/terminology')->to(template => 'terminology');
 
-  $r->get('/gene2phenotype/downloads/#file_name' => sub {
+  $r->get('/gene2phenotype/legacy/downloads/#file_name' => sub {
     my $c = shift;
 
     my $ip = $c->remote_addr;
@@ -289,7 +289,7 @@ sub startup {
     if (!$is_logged_in) {
       if (! grep {$panel_name eq $_} @authorised_panels) {
         $c->flash(message => 'Specified panel cannot be downloaded. Please contact g2p-help@ebi.ac.uk', alert_class => 'alert-danger');
-        return $c->redirect_to('/gene2phenotype/downloads');
+        return $c->redirect_to('/gene2phenotype/legacy/downloads');
       }          
     }   
 
@@ -306,10 +306,10 @@ sub startup {
     $c->render_file('filepath' => "$tmp_dir/$file_name.gz", 'filename' => "$file_name.gz", 'format' => 'zip', 'cleanup' => 1);
   });
 
-  $r->get('/gene2phenotype/curator/no_publication')->to('curator#no_publication');
-  $r->get('/gene2phenotype/curator/restricted_entries')->to('curator#restricted');
-  $r->get('/gene2phenotype/curator/show_all_duplicated_LGM_by_panel')->to('curator#show_all_duplicated_LGM_by_panel');
-  $r->get('/gene2phenotype/curator/show_all_duplicated_LGM_by_gene')->to('curator#show_all_duplicated_LGM_by_gene');
+  $r->get('/gene2phenotype/legacy/curator/no_publication')->to('curator#no_publication');
+  $r->get('/gene2phenotype/legacy/curator/restricted_entries')->to('curator#restricted');
+  $r->get('/gene2phenotype/legacy/curator/show_all_duplicated_LGM_by_panel')->to('curator#show_all_duplicated_LGM_by_panel');
+  $r->get('/gene2phenotype/legacy/curator/show_all_duplicated_LGM_by_gene')->to('curator#show_all_duplicated_LGM_by_gene');
 
 }
 

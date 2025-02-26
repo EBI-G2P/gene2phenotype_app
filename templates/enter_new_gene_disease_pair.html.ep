@@ -3,7 +3,7 @@
 <div class="container">
 <h3>Enter a new gene-disease pair</h3>
 <ol>
-  <li>Login to the website https://www.ebi.ac.uk/gene2phenotype/login</li>
+  <li>Login to the website https://www.ebi.ac.uk/gene2phenotype/legacy/login</li>
   <li>First, search for your gene or disease of interest for which you want to create a new entry. You can search by gene symbol and disease name. Search works with autocomplete. All Ensembl genes are preloaded with their HGNC symbol. All disease names that have been added to the database are frequently added to the search index and are also accessible by autocomplete search. If you cannot find your gene, please contact <a href="mailto:g2p-help@ebi.ac.uk">g2p-help@ebi.ac.uk</a></li>
   <li>If the entry you want to add is not listed in the search results follow the link <mark>Add New Gene Disease Entry</mark> to creat a new entry.</li>
   <li>Choose the correct panel, select the gene symbol, enter a disease name, and select the disease confidence. Then click <mark>Add</mark>. A new gene disease pair is created and you will be directed to the new page automatically.</li>

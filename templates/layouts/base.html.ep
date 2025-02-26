@@ -24,6 +24,6 @@
 %= javascript '/gene2phenotype/scripts/jquery.confirm.min.js'
 %= javascript 'https://www.gstatic.com/charts/loader.js'
 %= javascript '/gene2phenotype/scripts/panel_statistics.js?version=3'
-  </head>
+  </head> 
  <body><%= content %></body>
 </html>

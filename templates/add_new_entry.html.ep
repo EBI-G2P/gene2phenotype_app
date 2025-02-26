@@ -2,7 +2,7 @@
 %= include 'search'
 <div class="container">
   <h3>Add new gene-disease:</h3>
-  %= form_for '/gene2phenotype/gfd_panel/add' => (class => 'form-horizontal', id => 'add_gfd_form') => begin
+  %= form_for '/gene2phenotype/legacy/gfd_panel/add' => (class => 'form-horizontal', id => 'add_gfd_form') => begin
 
     <div class="form-group">
       <label class="col-sm-2 control-label">Gene symbol</label>
@@ -204,7 +204,7 @@
               <td><%= join(',', @{$gfd->{disease_name_synonyms}}) %></td>
               <td><%= join(',', @{$gfd->{panels}}) %></td>
               <td>
-                %= form_for '/gene2phenotype/gfd' => (id => $gfd->{gfd_id}) => begin
+                %= form_for '/gene2phenotype/legacy/gfd' => (id => $gfd->{gfd_id}) => begin
                   %= hidden_field dbID => $gfd->{gfd_id}
                   <input id="button" type="submit" value="Go to page" class="btn btn-primary btn-sm"/>
                 % end
@@ -241,7 +241,7 @@
               <td><%= join(',', @{$gfd->{disease_name_synonyms}}) %></td>
               <td><%= join(',', @{$gfd->{panels}}) %></td>
               <td>
-                %= form_for '/gene2phenotype/gfd_panel/add' => ( id => 'add_con') => begin
+                %= form_for '/gene2phenotype/legacy/gfd_panel/add' => ( id => 'add_con') => begin
                   %= hidden_field add_existing_entry_to_panel => 1
                   %= hidden_field gfd_id => $gfd->{gfd_id}
                   <% if (my $confidence_value_to_be_added = stash 'confidence_value_to_be_added') { %>
@@ -286,7 +286,7 @@
               <td><%= join(',', @{$gfd->{disease_name_synonyms}}) %></td>
               <td><%= join(',', @{$gfd->{panels}}) %></td>
               <td>
-                %= form_for '/gene2phenotype/gfd_panel/add' => begin
+                %= form_for '/gene2phenotype/legacy/gfd_panel/add' => begin
                   %= hidden_field add_existing_entry_to_panel => 1
                   %= hidden_field gfd_id => $gfd->{gfd_id}
                   <% if (my $confidence_value_to_be_added = stash 'confidence_value_to_be_added') { %>
@@ -336,7 +336,7 @@
                 <% } %>
               </td>
               <td>
-                %= form_for '/gene2phenotype/gfd_panel/add' => begin
+                %= form_for '/gene2phenotype/legacy/gfd_panel/add' => begin
                   %= hidden_field create_new_gfd => 1
                   %= hidden_field gene_symbol => $new_gfd->{gene_symbol}
                   %= hidden_field disease_name => $new_gfd->{disease_name}

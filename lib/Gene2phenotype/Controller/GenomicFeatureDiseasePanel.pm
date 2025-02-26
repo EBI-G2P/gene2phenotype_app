@@ -39,7 +39,7 @@ use XML::Simple;
   Returntype :
   Exceptions : None
   Caller     : Template: add_new_entry.html.ep
-               Request: GET /gene2phenotype/gfd_panel/add
+               Request: GET /gene2phenotype/legacy/gfd_panel/add
                Params:
                    Add button:
                      panel                          - Add new entry to this panel
@@ -130,7 +130,7 @@ sub add {
   my $gf = $gf_model->fetch_by_gene_symbol($gene_symbol); 
   if (!$gf) {
     $self->feedback_message('GF_NOT_IN_DB');
-    return $self->redirect_to("/gene2phenotype/gfd/show_add_new_entry_form");
+    return $self->redirect_to("/gene2phenotype/legacy/gfd/show_add_new_entry_form");
   }
 
   my $disease_model = $self->model('disease');
@@ -161,7 +161,7 @@ sub add {
       my $gfd = $existing_gfds->{same_disease_target_panel};
       my $gfd_id = $gfd->dbID;
       $self->feedback_message('GFD_IN_DB');
-      return $self->redirect_to("/gene2phenotype/gfd?GFD_id=$gfd_id");   
+      return $self->redirect_to("/gene2phenotype/legacy/gfd?GFD_id=$gfd_id");   
     } else {
       # Send user back to add new entry page
       # And show the existing GFDs
@@ -343,7 +343,7 @@ sub add_gfd_to_panel {
   );
   $self->feedback_message('ADDED_GFD_SUC');
 
-  $self->redirect_to("/gene2phenotype/gfd?GFD_id=$gfd_id");
+  $self->redirect_to("/gene2phenotype/legacy/gfd?GFD_id=$gfd_id");
 }
 
 
@@ -431,7 +431,7 @@ sub _get_existing_gfds {
   Description: Update the visibility setting of a GenomicFeatureDiseasePanel
   Exceptions : None
   Caller     : Template: user/gfd_attributes.html.ep
-               Request: GET /gene2phenotype/gfd_panel/authorised/update
+               Request: GET /gene2phenotype/legacy/gfd_panel/authorised/update
                Params:
                    visibility - The value is either authorised or restricted
                    GFD_id - database id of the GenomicFeatureDisease
@@ -447,16 +447,16 @@ sub update_visibility {
   my $model = $self->model('genomic_feature_disease_panel');  
   my $email = $self->session('email');
   $model->update_visibility($email, $GFD_panel_id, $visibility);
-  $self->session(last_url => "/gene2phenotype/gfd?GFD_id=$GFD_id");
+  $self->session(last_url => "/gene2phenotype/legacy/gfd?GFD_id=$GFD_id");
   $self->feedback_message('UPDATED_VISIBILITY_STATUS_SUC');
-  return $self->redirect_to("/gene2phenotype/gfd?GFD_id=$GFD_id");
+  return $self->redirect_to("/gene2phenotype/legacy/gfd?GFD_id=$GFD_id");
 }
 
 =head2 update_confidence_category
   Description: Update the confidence value of a GenomicFeatureDiseasePanel
   Exceptions : None
   Caller     : Template: user/gfd_attributes.html.ep
-               Request: GET /gene2phenotype/gfd_panel/confidence_category/update
+               Request: GET /gene2phenotype/legacy/gfd_panel/confidence_category/update
                Params:
                    category_attrib_id - The new confidence category attrib
                    GFD_id - database id of the GenomicFeatureDisease
@@ -472,16 +472,16 @@ sub update_confidence_category {
   my $model = $self->model('genomic_feature_disease_panel');  
   my $email = $self->session('email');
   $model->update_confidence_category($email, $GFD_panel_id, $category_attrib_id);
-  $self->session(last_url => "/gene2phenotype/gfd?GFD_id=$GFD_id");
+  $self->session(last_url => "/gene2phenotype/legacy/gfd?GFD_id=$GFD_id");
   $self->feedback_message('UPDATED_CONFIDENCE_CATEGORY_SUC');
-  return $self->redirect_to("/gene2phenotype/gfd?GFD_id=$GFD_id");
+  return $self->redirect_to("/gene2phenotype/legacy/gfd?GFD_id=$GFD_id");
 }
 
 =head2 delete
   Description: Delete the GenomicFeatureDiseasePanel
   Exceptions : None
   Caller     : Template: user/gfd_attributes.html.ep
-               Request: GET /gene2phenotype/gfd_panel/delete
+               Request: GET /gene2phenotype/legacy/gfd_panel/delete
                Params:
                    GFD_id - database id of the GenomicFeatureDisease
                    GFD_panel_id - database id the GenomicFeatureDiseasePanel
@@ -496,7 +496,7 @@ sub delete {
   my $email = $self->session('email');
   $model->delete($email, $GFD_panel_id);
   $self->feedback_message('DELETED_GFD_PANEL_SUC');
-  return $self->redirect_to("/gene2phenotype/gfd?GFD_id=$GFD_id");
+  return $self->redirect_to("/gene2phenotype/legacy/gfd?GFD_id=$GFD_id");
 }
 
 sub add_publication {

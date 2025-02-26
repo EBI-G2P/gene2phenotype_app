@@ -23,7 +23,7 @@
 
     <div class="show_edit_content">
       <h4>Update disease information</h4>
-      %= form_for '/gene2phenotype/disease/update' => (method => 'GET') => (id => 'update_disease') => begin
+      %= form_for '/gene2phenotype/legacy/disease/update' => (method => 'GET') => (id => 'update_disease') => begin
         <div class="form-group">
           <label>OMIM MIM:</label>
           %= input_tag mim => $disease->{mim}, class => "form-control mim", placeholder => $disease->{mim}
