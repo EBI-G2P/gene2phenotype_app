@@ -131,7 +131,7 @@ sub send_recover_pwd_mail {
     $self->flash(message => "No account registered with email $email. Please contact g2p-help\@ebi.ac.uk for help.", alert_class => 'alert-danger');
   }
 
-  return $self->redirect_to('/gene2phenotype');
+  return $self->redirect_to('/gene2phenotype/legacy');
 }
 
 =head2 validate_pwd_recovery
@@ -183,7 +183,7 @@ sub account_info {
     $self->render(template => 'login/account_info');
   } else {
     $self->feedback_message('LOGIN_FOR_ACCOUNT_INFO');
-    return $self->redirect_to('/gene2phenotype');
+    return $self->redirect_to('/gene2phenotype/legacy');
   }
 }
 
