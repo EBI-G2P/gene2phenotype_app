@@ -17,10 +17,7 @@
       <input id="login_submit" type="submit" class="btn btn-primary"/>
   %end
   %= link_to 'Forgot password?' => '/gene2phenotype/legacy/login/recovery' %>
-  <div class="alert alert-info" role="alert">
-    <h4>Note</h4>
-    <p>We are transitioning to a new website soon. The current website is in read-only mode. For curation, use the <a href="https://www.ebi.ac.uk/gene2phenotype/beta/">new beta website</a>.</p>
-  </div>
+
 </div>
 %= include 'alerts'
 %= include 'footer'

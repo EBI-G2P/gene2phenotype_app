@@ -1,5 +1,5 @@
 <div>
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default" style="margin-bottom:0">
     <div class="container-fluid">
       <ul class="nav navbar-nav">
         <li>
@@ -40,5 +40,27 @@
       </ul>
     </div>
   </nav>
-
+  <div role="alert" class="alert alert-warning">
+    <h4 class="alert-heading">
+      This is a static archive of the former G2P website
+    </h4>
+    The <strong>G2P website</strong>, established in 2014, has been redesigned
+    and is now available on
+    <a
+      href="https://www.ebi.ac.uk/gene2phenotype"
+      style="text-decoration: underline"
+      class="alert-link"
+      >this link</a
+    >. Data on this archive site was last updated in January 2025 so is no
+    longer recommended for general use. The new implementation reports more
+    detailed gene-disease mechanism information than previous and there are some
+    terminology differences. The data download format has also been updated. See
+    <a
+      href="https://ftp.ebi.ac.uk/pub/databases/gene2phenotype/README"
+      style="text-decoration: underline"
+      class="alert-link"
+      >this link</a
+    >
+    for more details or get in touch.
+  </div>
 </div>
